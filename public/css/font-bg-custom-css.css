@@ -1,0 +1,36 @@
+html,
+body {
+    font-family: Montserrat,Helvetica,Arial,serif;
+    /*background-color: #dbd4cc;*/
+}
+.hero-head{
+    background-color: white;
+}
+.hero-foot{
+    background-color: white;
+}
+.photo-holder{
+    background-color: white;
+    border: solid 5px lightgray;
+    border-radius: 3px;
+}
+
+img {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.quilt {
+    font-family: 'mazeletter';
+    position: fixed;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    font-size: calc(1.5vw + 1.5vh + 2vmin);
+    margin: 0px;
+    padding: 0px;
+    line-height: 1;
+    /* font-weight: 500; */
+    color: darkgrey;
+    background-color: #dbd4cc;
+    height: 100vh;
+}
