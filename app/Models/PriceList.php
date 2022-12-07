@@ -16,4 +16,9 @@ class PriceList extends Model
      * @var array<int, string>
      */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function paymentMethod()
+    {
+        return  $this->belongsTo(PaymentMethod::class);
+    }
 }

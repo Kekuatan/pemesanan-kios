@@ -7,8 +7,8 @@
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item "><a href="#"
-                                                               wire:click="link('/dashboard')"
-                                                               class="router-link-active" target="_self">
+                                                                wire:click="link('/dashboard')"
+                                                                class="router-link-active" target="_self">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                              stroke-linecap="round" stroke-linejoin="round"
@@ -88,14 +88,14 @@
 
         <section data-v-36ff53bc="" class="invoice-add-wrapper"><!---->
             <div data-v-36ff53bc="" class="row invoice-add">
-                <div data-v-36ff53bc="" class="col-md-8 col-xl-9 col-12">
+                <div data-v-36ff53bc="" id="printarea"  class="col-md-8 col-xl-9 col-12">
                     <form data-v-36ff53bc="" class="">
                         <div data-v-36ff53bc="" class="card invoice-preview-card"><!----><!---->
-                            <div data-v-36ff53bc="" class="card-body invoice-padding pb-0"><!----><!---->
+                            <div data-v-36ff53bc="" class="  card-body invoice-padding pb-0"><!----><!---->
                                 <div data-v-36ff53bc=""
-                                     class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
+                                     class=" invoice-top row ">
                                     <!-- Invoice top-left-->
-                                    <div data-v-36ff53bc="">
+                                    <div data-v-36ff53bc="" class="invoice-top-left col-md-6">
                                         <div data-v-36ff53bc="" class="logo-wrapper">
                                             <svg data-v-36ff53bc="" viewBox="0 0 139 95" version="1.1"
                                                  xmlns="http://www.w3.org/2000/svg"
@@ -135,113 +135,89 @@
                                                 </g>
                                             </svg>
                                             <h3 data-v-36ff53bc="" class="text-primary invoice-logo"> Vuexy </h3></div>
-                                        <p data-v-36ff53bc="" class="card-text mb-25"> Office 149, 450 South Brand
+                                        <p data-v-36ff53bc="" class="card-text mb-25"> PT. Rapik Indonesia
                                             Brooklyn </p>
-                                        <p data-v-36ff53bc="" class="card-text mb-25"> San Diego County, CA 91905,
+                                        <p data-v-36ff53bc="" class="card-text mb-25"> Cimanggis
                                             USA </p>
-                                        <p data-v-36ff53bc="" class="card-text mb-0"> +1 (123) 456 7891, +44 (876) 543
+                                        <p data-v-36ff53bc="" class="card-text mb-0"> +62 (021) 456 7891
                                             2198 </p>
                                     </div>
 
                                     <!-- Invoice top-right-->
-                                    <div data-v-36ff53bc="" class="invoice-number-date mt-md-0 mt-2">
-                                        <div class="mb-2 row  ">
-                                            <label for="staticEmail" class="col-sm-3 col-form-label invoice-title"><h5>Invoice</h5></label>
-                                            <div class="col-sm-9">
-
-                                                <div data-v-36ff53bc="" role="group"
-                                                     class="input-group input-group-merge invoice-edit-input-group disabled">
-                                                    <!---->
-                                                    <div data-v-36ff53bc="" class="input-group-prepend">
-                                                        <div data-v-36ff53bc="" class="input-group-text">
-                                                            <svg data-v-36ff53bc="" xmlns="http://www.w3.org/2000/svg"
-                                                                 width="14px" height="14px" viewBox="0 0 24 24" fill="none"
-                                                                 stroke="currentColor" stroke-width="2"
-                                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                                 class="feather feather-hash">
-                                                                <line data-v-36ff53bc="" x1="4" y1="9" x2="20"
-                                                                      y2="9"></line>
-                                                                <line data-v-36ff53bc="" x1="4" y1="15" x2="20"
-                                                                      y2="15"></line>
-                                                                <line data-v-36ff53bc="" x1="10" y1="3" x2="8"
-                                                                      y2="21"></line>
-                                                                <line data-v-36ff53bc="" x1="16" y1="3" x2="14"
-                                                                      y2="21"></line>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <input data-v-36ff53bc="" id="invoice-data-id" type="text"
-                                                           disabled="disabled" class="form-control"><!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="staticEmail" class="col-sm-4 col-form-label">Tanggal</label>
-                                            <div class="col-sm-8">
+                                    <div data-v-36ff53bc="" class=" invoice-top-right col-md-6">
+                                        <div class="mb-3 row right-input">
+                                            <label for="staticEmail" class="col-sm-8 col-form-label">Tanggal</label>
+                                            <div class="col-sm-4">
                                                 <input type="text"
-                                                       class="form-control invoice-edit-input flatpickr-input"
-                                                       readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                                                       class="right-input form-control invoice-edit-input flatpickr-input"
+                                                       readonly class="form-control-plaintext" id="staticEmail"
+                                                       value="{{\Carbon\Carbon::now()->toDateString()}}">
                                             </div>
                                         </div>
-{{--                                        <div data-v-36ff53bc="" class="d-flex align-items-center mb-1">--}}
-{{--                                            <span data-v-36ff53bc="" class="title"> Date: </span>--}}
-{{--                                            <input data-v-36ff53bc=""--}}
-{{--                                                   type="text"--}}
-{{--                                                   data-input="true"--}}
-{{--                                                   class="form-control invoice-edit-input flatpickr-input"--}}
-{{--                                                   readonly="readonly">--}}
-{{--                                        </div>--}}
-{{--                                        <div data-v-36ff53bc="" class="d-flex align-items-center">--}}
-{{--                                            <span--}}
-{{--                                                data-v-36ff53bc="" class="title"> Due Date: </span>--}}
-{{--                                            <input--}}
-{{--                                                data-v-36ff53bc="" type="text" data-input="true"--}}
-{{--                                                class="form-control invoice-edit-input flatpickr-input"--}}
-{{--                                                readonly="readonly"></div>--}}
+                                        {{--                                        <div data-v-36ff53bc="" class="d-flex align-items-center mb-1">--}}
+                                        {{--                                            <span data-v-36ff53bc="" class="title"> Date: </span>--}}
+                                        {{--                                            <input data-v-36ff53bc=""--}}
+                                        {{--                                                   type="text"--}}
+                                        {{--                                                   data-input="true"--}}
+                                        {{--                                                   class="form-control invoice-edit-input flatpickr-input"--}}
+                                        {{--                                                   readonly="readonly">--}}
+                                        {{--                                        </div>--}}
+                                        {{--                                        <div data-v-36ff53bc="" class="d-flex align-items-center">--}}
+                                        {{--                                            <span--}}
+                                        {{--                                                data-v-36ff53bc="" class="title"> Due Date: </span>--}}
+                                        {{--                                            <input--}}
+                                        {{--                                                data-v-36ff53bc="" type="text" data-input="true"--}}
+                                        {{--                                                class="form-control invoice-edit-input flatpickr-input"--}}
+                                        {{--                                                readonly="readonly"></div>--}}
                                     </div>
                                 </div>
                             </div>
 
                             <hr data-v-36ff53bc="" class="invoice-spacing">
                             <div data-v-36ff53bc="" class="card-body invoice-padding pt-0"><!----><!---->
-                                <div data-v-36ff53bc="" class="row invoice-spacing">
-                                    <div data-v-36ff53bc="" class="mb-lg-1 col-xl-6 col-12"><h6 data-v-36ff53bc=""
+                                <div data-v-36ff53bc="" class="row">
+                                    <!-- Invoice-mid-left-->
+                                    <div data-v-36ff53bc="" class="invoice-mid-left  mb-lg-1 col-xl-6 col-md-6">
+                                        <h6 data-v-36ff53bc=""
                                                                                                 class="mb-2"> Invoice
                                             To: </h6>
                                         <div data-v-36ff53bc="" class="mt-1"><h6 data-v-36ff53bc="" class="mb-25">
-                                                Jordan Stevenson </h6>
-                                            <p data-v-36ff53bc="" class="card-text mb-25"> Hall-Robbins PLC </p>
-                                            <p data-v-36ff53bc="" class="card-text mb-25"> 7777 Mendez Plains, USA </p>
-                                            <p data-v-36ff53bc="" class="card-text mb-25"> (616) 865-4180 </p>
-                                            <p data-v-36ff53bc="" class="card-text mb-0"> don85@johnson.com </p></div>
+                                                {{$name . (blank($inputs['name']) ? "" : '/'.$inputs['name'])}}</h6>
+                                            <p data-v-36ff53bc="" class="card-text mb-25">
+                                                {{$ktpNo . (blank($inputs['ktpNo']) ? "" : '/'.$inputs['ktpNo'])}}
+                                            </p>
+                                            <p data-v-36ff53bc="" class="card-text mb-25">
+                                                {{$address . (blank($inputs['address']) ? "" : '/'.$inputs['address'])}}
+                                            </p>
+                                            <p data-v-36ff53bc="" class="card-text mb-25">
+                                                {{$phoneNumber . (blank($inputs['phoneNumber']) ? "" : '/'.$inputs['phoneNumber'])}}
+                                            </p>
+                                            <p data-v-36ff53bc="" class="card-text mb-0">
+                                                {{$kiosNo}}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div data-v-36ff53bc=""
-                                         class="mt-xl-0 mt-2 justify-content-end d-xl-flex d-block col-xl-6 col-12">
-                                        <div data-v-36ff53bc=""><h6 data-v-36ff53bc="" class="mb-2"> Payment
+                                    <!-- Invoice-mid-right-->
+                                    <div data-v-36ff53bc="" class="invoice-mid-right  mt-xl-0 mt-2 justify-content-end d-xl-flex d-block col-xl-6 col-md-6"
+                                    >
+                                        <div data-v-36ff53bc="" style="float: right">
+                                            <h6 data-v-36ff53bc="" class="mb-2"> Pembayaran
                                                 Details: </h6>
                                             <table data-v-36ff53bc="">
                                                 <tbody data-v-36ff53bc="">
                                                 <tr data-v-36ff53bc="">
-                                                    <td data-v-36ff53bc="" class="pr-1"> Total Due:</td>
+                                                    <td data-v-36ff53bc="" class="pr-1"> Nama Bank:</td>
                                                     <td data-v-36ff53bc=""><span data-v-36ff53bc=""
-                                                                                 class="font-weight-bold">$12,110.55</span>
+                                                                                 class="font-weight-bold">BRI</span>
                                                     </td>
                                                 </tr>
                                                 <tr data-v-36ff53bc="">
-                                                    <td data-v-36ff53bc="" class="pr-1"> Bank name:</td>
-                                                    <td data-v-36ff53bc="">American Bank</td>
+                                                    <td data-v-36ff53bc="" class="pr-1"> VA:</td>
+                                                    <td data-v-36ff53bc="">1111111111111111</td>
                                                 </tr>
                                                 <tr data-v-36ff53bc="">
-                                                    <td data-v-36ff53bc="" class="pr-1"> Country:</td>
-                                                    <td data-v-36ff53bc="">United States</td>
-                                                </tr>
-                                                <tr data-v-36ff53bc="">
-                                                    <td data-v-36ff53bc="" class="pr-1"> IBAN:</td>
-                                                    <td data-v-36ff53bc="">ETD95476213874685</td>
-                                                </tr>
-                                                <tr data-v-36ff53bc="">
-                                                    <td data-v-36ff53bc="" class="pr-1"> SWIFT code:</td>
-                                                    <td data-v-36ff53bc="">BR91905</td>
+                                                    <td data-v-36ff53bc="" class="pr-1"> Type: </td>
+                                                    <td data-v-36ff53bc="">{{optional(optional($price_list)['payment_method'])['name']}}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -249,246 +225,330 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-v-36ff53bc="" class="card-body invoice-padding form-item-section"><!----><!---->
-                                <div data-v-36ff53bc="" class="repeater-form" style="height: 489px;">
-                                    <div data-v-36ff53bc="" class="row pb-2">
-                                        <div data-v-36ff53bc="" class="col-12">
-                                            <div data-v-36ff53bc="" class="d-none d-lg-flex">
-                                                <div data-v-36ff53bc="" class="row flex-grow-1 px-1">
-                                                    <div data-v-36ff53bc="" class="col-lg-5 col-12"> Item</div>
-                                                    <div data-v-36ff53bc="" class="col-lg-3 col-12"> Cost</div>
-                                                    <div data-v-36ff53bc="" class="col-lg-2 col-12"> Qty</div>
-                                                    <div data-v-36ff53bc="" class="col-lg-2 col-12"> Price</div>
-                                                </div>
-                                                <div data-v-36ff53bc="" class="form-item-action-col"></div>
-                                            </div>
-                                            <div data-v-36ff53bc="" class="d-flex border rounded">
-                                                <div data-v-36ff53bc="" class="row flex-grow-1 p-2">
-                                                    <div data-v-36ff53bc="" class="col-lg-5 col-12"><label
-                                                            data-v-36ff53bc="" class="d-inline d-lg-none">Item</label>
-                                                        <div data-v-36ff53bc="" dir="ltr"
-                                                             class="v-select mb-2 item-selector-title vs--single vs--searchable">
-                                                            <div id="vs7__combobox" role="combobox"
-                                                                 aria-expanded="false" aria-owns="vs7__listbox"
-                                                                 aria-label="Search for option"
-                                                                 class="vs__dropdown-toggle">
-                                                                <div class="vs__selected-options"><span
-                                                                        class="vs__selected">
-            App Design
-                                                                        <!----></span> <input aria-autocomplete="list"
-                                                                                              aria-labelledby="vs7__combobox"
-                                                                                              aria-controls="vs7__listbox"
-                                                                                              type="search"
-                                                                                              autocomplete="off"
-                                                                                              class="vs__search"></div>
-                                                                <div class="vs__actions">
-                                                                    <button type="button" title="Clear Selected"
-                                                                            aria-label="Clear Selected"
-                                                                            class="vs__clear" style="display: none;">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             width="14px" height="14px"
-                                                                             viewBox="0 0 24 24" fill="none"
-                                                                             stroke="currentColor" stroke-width="2"
-                                                                             stroke-linecap="round"
-                                                                             stroke-linejoin="round"
-                                                                             class="feather feather-x">
-                                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                                        </svg>
-                                                                    </button>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15px"
-                                                                         height="15px" viewBox="0 0 24 24" fill="none"
-                                                                         stroke="currentColor" stroke-width="2"
-                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                         class="feather feather-chevron-down open-indicator vs__open-indicator"
-                                                                         >
-                                                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                                                    </svg>
-                                                                    <div class="vs__spinner" style="display: none;">
-                                                                        Loading...
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <ul id="vs7__listbox" role="listbox"
-                                                                style="display: none; visibility: hidden;"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-36ff53bc="" class="col-lg-3 col-12"><label
-                                                            data-v-36ff53bc=""
-                                                            class="d-inline d-lg-none">Cost</label><input
-                                                            data-v-36ff53bc="" type="number" class="mb-2 form-control"
-                                                            id="__BVID__721"></div>
-                                                    <div data-v-36ff53bc="" class="col-lg-2 col-12"><label
-                                                            data-v-36ff53bc=""
-                                                            class="d-inline d-lg-none">Qty</label><input
-                                                            data-v-36ff53bc="" type="number" class="mb-2 form-control"
-                                                            id="__BVID__722"></div>
-                                                    <div data-v-36ff53bc="" class="col-lg-2 col-12"><label
-                                                            data-v-36ff53bc="" class="d-inline d-lg-none">Price</label>
-                                                        <p data-v-36ff53bc="" class="mb-1"> $48 </p></div>
-                                                    <div data-v-36ff53bc="" class="col-lg-5 col-12"><label
-                                                            data-v-36ff53bc=""
-                                                            class="d-inline d-lg-none">Description</label><textarea
-                                                            data-v-36ff53bc="" rows="2" wrap="soft"
-                                                            class="mb-2 mb-lg-0 form-control"
-                                                            id="__BVID__723"></textarea></div>
-                                                    <div data-v-36ff53bc="" class="col"><p data-v-36ff53bc=""
-                                                                                           class="mb-0"> Discount: 0% 0%
-                                                            0% </p></div>
-                                                </div>
-                                                <div data-v-36ff53bc=""
-                                                     class="d-flex flex-column justify-content-between border-left py-50 px-25">
-                                                    <svg data-v-36ff53bc="" xmlns="http://www.w3.org/2000/svg"
-                                                         width="16px" height="16px" viewBox="0 0 24 24" fill="none"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round"
-                                                         class="cursor-pointer feather feather-x">
-                                                        <line data-v-36ff53bc="" x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line data-v-36ff53bc="" x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                    <svg data-v-36ff53bc="" xmlns="http://www.w3.org/2000/svg"
-                                                         width="16px" height="16px" viewBox="0 0 24 24" fill="none"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round" id="form-item-settings-icon-0"
-                                                         class="cursor-pointer feather feather-settings">
-                                                        <circle data-v-36ff53bc="" cx="12" cy="12" r="3"></circle>
-                                                        <path data-v-36ff53bc=""
-                                                              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                                                    </svg><!----></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button data-v-36ff53bc="" type="button" class="btn btn-primary btn-sm"> Add Item
-                                </button>
-                            </div>
+{{--                            <div data-v-36ff53bc="" class="card-body invoice-padding form-item-section"><!----><!---->--}}
+{{--                                <p>aaa</p>--}}
+{{--                            </div>--}}
                             <div data-v-36ff53bc="" class="card-body invoice-padding pb-0"><!----><!---->
                                 <div data-v-36ff53bc="" class="row">
+                                    <!-- Invoice bottom-left-->
                                     <div data-v-36ff53bc=""
-                                         class="mt-md-0 mt-3 d-flex align-items-center col-md-6 order-md-1 col-12 order-2">
+                                         class="mt-md-0 mt-3  col-md-6">
                                         <label data-v-36ff53bc="" for="invoice-data-sales-person"
-                                               class="text-nowrap mr-50">Sales Person:</label><input data-v-36ff53bc=""
+                                               class="text-nowrap mr-50">Petugas:</label><input data-v-36ff53bc=""
                                                                                                      id="invoice-data-sales-person"
                                                                                                      type="text"
-                                                                                                     placeholder="Edward Crowley"
+                                                                                                     placeholder="{{$user->name}}"
                                                                                                      class="form-control">
                                     </div>
+                                    <!-- Invoice bottom-right-->
                                     <div data-v-36ff53bc=""
-                                         class="mt-md-6 d-flex justify-content-end col-md-6 order-md-2 col-12 order-1">
-                                        <div data-v-36ff53bc="" class="invoice-total-wrapper">
+                                         class="mt-md-6 d-flex justify-content-end col-md-6">
+                                        <div data-v-36ff53bc="" class="invoice-total-wrapper" style="width: inherit">
                                             <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
                                                                                                   class="invoice-total-title">
-                                                    Subtotal: </p>
-                                                <p data-v-36ff53bc="" class="invoice-total-amount"> $1800 </p></div>
+                                                    Harga tempat usaha: </p>
+                                                <p data-v-36ff53bc="" class="invoice-total-amount d-flex justify-content-end">
+                                                    {{$price_text}} </p>
+                                            </div>
+
                                             <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
                                                                                                   class="invoice-total-title">
-                                                    Discount: </p>
-                                                <p data-v-36ff53bc="" class="invoice-total-amount"> $28 </p></div>
+                                                    PPN ({{$ppn_rate_text}} ): </p>
+                                                <p data-v-36ff53bc="" class="invoice-total-amount d-flex justify-content-end">
+                                                    {{$ppn_text}}</p>
+                                            </div>
+                                            <hr data-v-36ff53bc="" class=invoice-spacing>
                                             <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
                                                                                                   class="invoice-total-title">
-                                                    Tax: </p>
-                                                <p data-v-36ff53bc="" class="invoice-total-amount"> 21% </p></div>
-                                            <hr data-v-36ff53bc="" class="my-50">
+                                                    Jumlah: </p>
+                                                <p data-v-36ff53bc="" class="invoice-total-amount d-flex justify-content-end">
+                                                    {{$price_with_ppn_text}} </p>
+                                            </div>
+
                                             <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
                                                                                                   class="invoice-total-title">
-                                                    Total: </p>
-                                                <p data-v-36ff53bc="" class="invoice-total-amount"> $1690 </p></div>
+                                                    Booking fee: </p>
+                                                <p data-v-36ff53bc="" class="invoice-total-amount d-flex justify-content-end"> {{$booking_fee_text}} </p>
+                                            </div>
+
+                                            <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
+                                                                                                  class="invoice-total-title">
+                                                    Discount ({{ $discount_rate_text }}): </p>
+                                                <p data-v-36ff53bc="" class="invoice-total-amount d-flex justify-content-end"> {{$discount_text}} </p>
+                                            </div>
+
+                                            <hr data-v-36ff53bc="" class=invoice-spacing>
+                                            <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
+                                                                                                  class="invoice-total-title">
+                                                    Jumlah yang harus dibayarkan: </p>
+                                                <p data-v-36ff53bc="" class="invoice-total-amount d-flex justify-content-end">
+                                                    {{$total_price_text}} </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr data-v-36ff53bc="" class="invoice-spacing">
-                            <div data-v-36ff53bc="" class="card-body invoice-padding pt-0"><!----><!----><span
-                                    data-v-36ff53bc="" class="font-weight-bold">Note: </span><textarea
-                                    data-v-36ff53bc="" rows="2" wrap="soft" class="form-control"
-                                    id="__BVID__726"></textarea></div><!----><!----></div>
+
+                        </div>
                     </form>
                 </div>
+
+
                 <div data-v-36ff53bc="" class="invoice-actions col-md-4 col-xl-3 col-12">
                     <div data-v-36ff53bc="" class="card"><!----><!---->
                         <div data-v-36ff53bc="" class="card-body"><!----><!---->
-                            <button data-v-36ff53bc="" type="button" class="btn mb-75 btn-primary btn-block collapsed"
-                                    aria-expanded="false" aria-controls="sidebar-send-invoice"
-                                    style="overflow-anchor: none;"> Send Invoice
-                            </button>
-                            <button data-v-36ff53bc="" type="button" class="btn mb-75 btn-outline-primary btn-block"
-                                    style="position: relative;"> Preview
-                            </button>
-                            <button data-v-36ff53bc="" type="button" class="btn btn-outline-primary btn-block"> Save
-                            </button>
-                            <button data-v-36ff53bc="" type="button" class="btn mb-75 btn-success btn-block collapsed"
-                                    aria-expanded="false" aria-controls="sidebar-invoice-add-payment"
-                                    style="overflow-anchor: none;"> Add Payment
-                            </button>
-                        </div><!----><!----></div>
-                    <div data-v-36ff53bc="" class="mt-2">
-                        <div data-v-36ff53bc="" role="group" class="form-group" id="__BVID__727"><label
-                                for="payment-method" class="d-block" id="__BVID__727__BV_label_">Accept Payment
-                                Via</label>
                             <div>
-                                <div data-v-36ff53bc="" dir="ltr"
-                                     class="v-select payment-selector vs--single vs--searchable">
-                                    <div id="vs8__combobox" role="combobox" aria-expanded="false"
-                                         aria-owns="vs8__listbox" aria-label="Search for option"
-                                         class="vs__dropdown-toggle">
-                                        <div class="vs__selected-options"><span class="vs__selected">
-            Bank Account
-                                                <!----></span> <input id="payment-method" aria-autocomplete="list"
-                                                                      aria-labelledby="vs8__combobox"
-                                                                      aria-controls="vs8__listbox" type="search"
-                                                                      autocomplete="off" class="vs__search"></div>
-                                        <div class="vs__actions">
-                                            <button type="button" title="Clear Selected" aria-label="Clear Selected"
-                                                    class="vs__clear" style="display: none;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px"
-                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                     class="feather feather-x">
-                                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                </svg>
-                                            </button>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="feather feather-chevron-down open-indicator vs__open-indicator"
-                                                 >
-                                                <polyline points="6 9 12 15 18 9"></polyline>
-                                            </svg>
-                                            <div class="vs__spinner" style="display: none;">Loading...</div>
-                                        </div>
-                                    </div>
-                                    <ul id="vs8__listbox" role="listbox"
-                                        style="display: none; visibility: hidden;"></ul>
-                                </div><!----><!----><!----></div>
-                        </div>
-                        <div data-v-36ff53bc="" class="d-flex justify-content-between align-items-center"><label
-                                data-v-36ff53bc="" for="patymentTerms">Payment Terms</label>
-                            <div data-v-36ff53bc="" class="custom-control custom-switch"><input id="patymentTerms"
-                                                                                                type="checkbox"
-                                                                                                class="custom-control-input"
-                                                                                                value="true"><label
-                                    for="patymentTerms" class="custom-control-label"></label></div>
-                        </div>
-                        <div data-v-36ff53bc="" class="d-flex justify-content-between align-items-center my-1"><label
-                                data-v-36ff53bc="" for="clientNotes">Client Notes</label>
-                            <div data-v-36ff53bc="" class="custom-control custom-switch"><input id="clientNotes"
-                                                                                                type="checkbox"
-                                                                                                class="custom-control-input"
-                                                                                                value="true"><label
-                                    for="clientNotes" class="custom-control-label"></label></div>
-                        </div>
-                        <div data-v-36ff53bc="" class="d-flex justify-content-between align-items-center"><label
-                                data-v-36ff53bc="" for="paymentStub">Payment Stub</label>
-                            <div data-v-36ff53bc="" class="custom-control custom-switch"><input id="paymentStub"
-                                                                                                type="checkbox"
-                                                                                                class="custom-control-input"
-                                                                                                value="true"><label
-                                    for="paymentStub" class="custom-control-label"></label></div>
-                        </div>
-                    </div>
+                                        <select  wire:model="inputs.price_list_id" class="custom-select">
+                                            <option disabled="disabled" value="" selected>--- Pilih jenis pembayaran--- </option>
+                                        @foreach ($priceLists as $priceList)
+                                                <option value="{{$priceList->id}}">{{$priceList->paymentMethod->name}}</option>
+                                            @endforeach
+
+                                        </select>
+                            </div>
+                            <div class="mb-75 ">
+                                <label for="staticEmail" class="col-sm-8 col-form-label">Nama</label>
+                                <div class="">
+                                    <input type="text"
+                                           class="right-input form-control invoice-edit-input flatpickr-input"
+                                            class="form-control-plaintext"
+                                           placeholder="{{$name}}" wire:model="inputs.name" >
+                                </div>
+                                <p>{{$inputs['name']}}</p>
+                            </div>
+
+                            <div class="mb-75 ">
+                                <label for="staticEmail" class="col-sm-8 col-form-label">Nomer KTP</label>
+                                <div class="">
+                                    <input type="text"
+                                           class="right-input form-control invoice-edit-input flatpickr-input"
+                                           class="form-control-plaintext"
+                                           placeholder="{{$ktpNo}}" wire:model="inputs.ktpNo">
+                                </div>
+                            </div>
+
+                            <div class="mb-75 ">
+                                <label for="staticEmail" class="col-sm-8 col-form-label">Nomer telephone</label>
+                                <div class="">
+                                    <input type="text"
+                                           class="right-input form-control invoice-edit-input flatpickr-input"
+                                           class="form-control-plaintext"
+                                           placeholder="{{$phoneNumber}}" wire:model="inputs.phoneNumber">
+                                </div>
+                            </div>
+
+                            <div class="mb-75 ">
+                                <label for="staticEmail" class="col-sm-8 col-form-label">Alamat</label>
+                                <div class="">
+                                    <input type="text"
+                                           class="right-input form-control invoice-edit-input flatpickr-input"
+                                           class="form-control-plaintext"
+                                           placeholder="{{$address}}" wire:model="inputs.address">
+                                </div>
+                            </div>
+
+                            @if(!blank($inputs["price_list_id"]))
+                            <div class="mb-75 ">
+                                <label for="staticEmail" class="col-sm-8 col-form-label">DP: {{$dp_text}}</label>
+                                <div class="">
+                                    <input type="text"
+                                           class="right-input form-control invoice-edit-input flatpickr-input"
+                                           class="form-control-plaintext"
+                                           placeholder="{{$inputs["dp"]}}" wire:model="inputs.dp">
+                                </div>
+                            </div>
+                            @endif
+
+                            @if($showPrint)
+                                <button wire:click="save" data-v-36ff53bc="" type="button" class="btn mb-75 btn-primary btn-block collapsed"
+                                        disabled aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                        style="overflow-anchor: none;"> Print
+                                </button>
+                            @else
+                                <button wire:click="save" data-v-36ff53bc="" type="button" class="btn mb-75 btn-primary btn-block collapsed"
+                                        aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                        style="overflow-anchor: none;"> Save
+                                </button>
+                            @endif
+
+
+                        </div><!----><!----></div>
+{{--                    <div data-v-36ff53bc="" class="mt-2">--}}
+{{--                        <div data-v-36ff53bc="" role="group" class="form-group" id="__BVID__727"><label--}}
+{{--                                for="payment-method" class="d-block" id="__BVID__727__BV_label_">Accept Payment--}}
+{{--                                Via</label>--}}
+{{--                            <div>--}}
+{{--                                <div data-v-36ff53bc="" dir="ltr"--}}
+{{--                                     class="v-select payment-selector vs--single vs--searchable">--}}
+{{--                                    <div id="vs8__combobox" role="combobox" aria-expanded="false"--}}
+{{--                                         aria-owns="vs8__listbox" aria-label="Search for option"--}}
+{{--                                         class="vs__dropdown-toggle">--}}
+{{--                                        <div class="vs__selected-options"><span class="vs__selected">--}}
+{{--            Bank Account--}}
+{{--                                                <!----></span> <input id="payment-method" aria-autocomplete="list"--}}
+{{--                                                                      aria-labelledby="vs8__combobox"--}}
+{{--                                                                      aria-controls="vs8__listbox" type="search"--}}
+{{--                                                                      autocomplete="off" class="vs__search"></div>--}}
+{{--                                        <div class="vs__actions">--}}
+{{--                                            <button type="button" title="Clear Selected" aria-label="Clear Selected"--}}
+{{--                                                    class="vs__clear" style="display: none;">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px"--}}
+{{--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                     class="feather feather-x">--}}
+{{--                                                    <line x1="18" y1="6" x2="6" y2="18"></line>--}}
+{{--                                                    <line x1="6" y1="6" x2="18" y2="18"></line>--}}
+{{--                                                </svg>--}}
+{{--                                            </button>--}}
+{{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px"--}}
+{{--                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"--}}
+{{--                                                 stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                 class="feather feather-chevron-down open-indicator vs__open-indicator"--}}
+{{--                                            >--}}
+{{--                                                <polyline points="6 9 12 15 18 9"></polyline>--}}
+{{--                                            </svg>--}}
+{{--                                            <div class="vs__spinner" style="display: none;">Loading...</div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <ul id="vs8__listbox" role="listbox"--}}
+{{--                                        style="display: none; visibility: hidden;"></ul>--}}
+{{--                                </div><!----><!----><!----></div>--}}
+{{--                        </div>--}}
+{{--                        <div data-v-36ff53bc="" class="d-flex justify-content-between align-items-center"><label--}}
+{{--                                data-v-36ff53bc="" for="patymentTerms">Payment Terms</label>--}}
+{{--                            <div data-v-36ff53bc="" class="custom-control custom-switch"><input id="patymentTerms"--}}
+{{--                                                                                                type="checkbox"--}}
+{{--                                                                                                class="custom-control-input"--}}
+{{--                                                                                                value="true"><label--}}
+{{--                                    for="patymentTerms" class="custom-control-label"></label></div>--}}
+{{--                        </div>--}}
+{{--                        <div data-v-36ff53bc="" class="d-flex justify-content-between align-items-center my-1"><label--}}
+{{--                                data-v-36ff53bc="" for="clientNotes">Client Notes</label>--}}
+{{--                            <div data-v-36ff53bc="" class="custom-control custom-switch"><input id="clientNotes"--}}
+{{--                                                                                                type="checkbox"--}}
+{{--                                                                                                class="custom-control-input"--}}
+{{--                                                                                                value="true"><label--}}
+{{--                                    for="clientNotes" class="custom-control-label"></label></div>--}}
+{{--                        </div>--}}
+{{--                        <div data-v-36ff53bc="" class="d-flex justify-content-between align-items-center"><label--}}
+{{--                                data-v-36ff53bc="" for="paymentStub">Payment Stub</label>--}}
+{{--                            <div data-v-36ff53bc="" class="custom-control custom-switch"><input id="paymentStub"--}}
+{{--                                                                                                type="checkbox"--}}
+{{--                                                                                                class="custom-control-input"--}}
+{{--                                                                                                value="true"><label--}}
+{{--                                    for="paymentStub" class="custom-control-label"></label></div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </section>
     </div>
 </div>
+
+<style>
+    .right-input {
+        text-align: right;
+    }
+
+    .invoice-total-amount{
+        margin: 0 !important;
+    }
+    .invoice-total-item{
+        margin: 0 !important;
+    }
+    .invoice-total-title{
+        margin: 0 !important;
+    }
+    .invoice-total-wrapper{
+        margin: 0 !important;
+    }
+
+    @page {
+        size: auto;   /* auto is the initial value */
+        margin: 0;  /* this affects the margin in the printer settings */
+    }
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        #printarea, #printarea * {
+            visibility: visible;
+        }
+        #printarea {
+            left: 0;
+            top: 0;
+        }
+
+
+        /*.invoice-top{*/
+        /*    width: 100px;*/
+        /*   display: inherit;*/
+        /*}*/
+
+        /*.invoice-top-right{*/
+        /*    width: 20%;*/
+        /*}*/
+        /*.invoice-top-left{*/
+        /*    width: 50%;*/
+        /*}*/
+
+
+
+        .invoice-spacing{
+            border-width: 2px !important;
+            border-style: solid !important;
+            font-size: 10px !important;
+            background-color: red;
+            -webkit-print-color-adjust:exact ;
+        }
+        .invoice-mid-right{
+            transform: translate(0,-25px);
+        }
+            .col-md-1,.col-md-2,.col-md-3,.col-md-4,
+            .col-md-5,.col-md-6,.col-md-7,.col-md-8,
+            .col-md-9,.col-md-10,.col-md-11,.col-md-12 {
+                float: left;
+            }
+
+            .col-md-1 {
+                width: 8%;
+            }
+            .col-md-2 {
+                width: 16%;
+            }
+            .col-md-3 {
+                width: 25%;
+            }
+            .col-md-4 {
+                width: 33%;
+            }
+            .col-md-5 {
+                width: 42%;
+            }
+            .col-md-6 {
+                width: 50%;
+            }
+            .col-md-7 {
+                width: 58%;
+            }
+            .col-md-8 {
+                width: 66%;
+            }
+            .col-md-9 {
+                width: 75%;
+            }
+            .col-md-10 {
+                width: 83%;
+            }
+            .col-md-11 {
+                width: 92%;
+            }
+            .col-md-12 {
+                width: 100%;
+            }
+            .col-12 {
+                width: 100%;
+            }
+    }
+</style>

@@ -18,4 +18,12 @@ class PaymentMethod extends Model
      */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
+
+
+    public function priceList()
+    {
+        return  $this->belongsTo("App/Models/PriceList");
+    }
+
+
 }

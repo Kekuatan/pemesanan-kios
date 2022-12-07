@@ -15,6 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->default(null)->nullable()->constrained('products');
+            $table->date('payment_date');
+            $table->boolean('verify')->default(0);
+            $table->unsignedBigInteger('amount');
             $table->timestamps();
         });
     }

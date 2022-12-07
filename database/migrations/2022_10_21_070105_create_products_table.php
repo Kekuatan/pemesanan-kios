@@ -55,7 +55,9 @@ class CreateProductsTable extends Migration
 
             $table->unsignedTinyInteger("status")->default(null)->nullable();
             $table->date("due_date")->default(null)->nullable();
+            $table->unsignedBigInteger('dp')->nullable();
             $table->foreignId('customer_id')->default(null)->nullable()->constrained('customers');
+            $table->foreignId('user_id')->default(null)->nullable()->constrained('users');
             $table->foreignId('price_list_id')->default(null)->nullable()->constrained('price_lists');
 
 
