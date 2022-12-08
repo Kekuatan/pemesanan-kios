@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string("code");
             $table->string("market_name")->nullable();
             $table->unsignedInteger("market_code")->nullable();
 
@@ -26,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->string("tu_type")->nullable();
             $table->string("tu_ownership")->nullable();
             $table->string("tu_status")->nullable();
-            $table->string("tu_no")->nullable();
+            $table->string("tu_no")->unique();
             $table->decimal("tu_area")->nullable();
             $table->string("siho_name")->nullable();
             $table->string("siho_birthplace")->nullable();
@@ -46,18 +45,18 @@ class CreateProductsTable extends Migration
             $table->string("shptu_no")->nullable();
             $table->string("shptu_start_at")->nullable();
 
+            $table->string('briva')->unique()->nullable();
 
             $table->string("merchant_name")->nullable();
             $table->string("merchant_tlp")->nullable();
-
             $table->longText('note')->nullable();
 
 
-            $table->unsignedTinyInteger("status")->default(null)->nullable();
+            $table->unsignedTinyInteger("status")->default(0);
             $table->date("due_date")->default(null)->nullable();
             $table->unsignedBigInteger('dp')->nullable();
+            $table->decimal('discount_rate')->nullable();
             $table->foreignId('customer_id')->default(null)->nullable()->constrained('customers');
-            $table->foreignId('user_id')->default(null)->nullable()->constrained('users');
             $table->foreignId('price_list_id')->default(null)->nullable()->constrained('price_lists');
 
 

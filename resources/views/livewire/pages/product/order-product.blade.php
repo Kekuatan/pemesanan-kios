@@ -121,7 +121,7 @@
 
         <fieldset class="form-group bg-white p-2" data-v-aa799a9e="" id="__BVID__4016"><!---->
             <div class="mx-auto width-40-per text-center">
-                <label for="basic-password" class="">SIPTU / SHPTU</label>
+                <label for="basic-password" class="">No Tempat Usaha</label>
 
                 <div role="group" class="input-group "><!---->
                     <div data-v-aa799a9e="" class="input-group-prepend">
@@ -137,7 +137,7 @@
                     </div>
                     <input id="basic-password" type="text"
                            wire:model="no_siptu_or_shptu"
-                           placeholder="Masukan nomer SIPTU atau SHPTU" class="form-control">
+                           placeholder="Masukan nomer tempat usaha" class="form-control">
                     {{--                <div class="input-group-append">--}}
                     {{--                    <div class="input-group-text">--}}
                     {{--                        <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24"--}}
@@ -167,8 +167,8 @@
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                     </div>
-                    <p class="card-text icon-name text-truncate mb-0 mt-1"> {{$product->shptu_no}} </p>
-                    <p class="card-text icon-name text-truncate mb-0 mt-1"> {{$product->siptu_no}} </p>
+                    <p class="card-text icon-name text-truncate mb-0 mt-1"> {{$product->tu_no}} </p>
+                    <p class="card-text icon-name text-truncate mb-0 mt-1"> {{$product->siho_name}} </p>
                 </div><!----><!----></div>
             @endforeach
         </div>

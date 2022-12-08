@@ -16,9 +16,9 @@ class PaymentMethodSeeder extends Seeder
     {
         PaymentMethod::create([
              'code' => 1,
-             'name' => 'cash keras',
-             'discount_rate' => 0.03,
-             'dp_rate' => 0.30,
+             'name' => 'Cash Keras',
+             'discount_rate' => 0.05,
+             'dp_rate' => 0.10,
              'credit_duration' => 1,
              'description'  => '
                 1. Pedagang Membayar Booking Fee sebesar Rp. 10.000.000 <br>
@@ -28,10 +28,10 @@ class PaymentMethodSeeder extends Seeder
 
                PaymentMethod::create([
                    'code' => 2,
-                   'name' => 'cicilan 6 bulan',
-                   'discount_rate' => 0.01,
-                   'dp_rate' => 0.30,
-                   'credit_duration' => 6,
+                   'name' => 'Bertahap 7 Bulan',
+                   'discount_rate' => 0.02,
+                   'dp_rate' => 0.10,
+                   'credit_duration' => 7,
                    'description'  => '
                     1. Pedagang Membayar Booking Fee sebesar Rp. 10.000.000 <br>
                     2. Pedagang Membayar Down Payment (DP) Sebesar 30% <br>
@@ -41,8 +41,8 @@ class PaymentMethodSeeder extends Seeder
 
                PaymentMethod::create([
                    'code' => 3,
-                   'name' => 'cicilan 12 bulan',
-                   'dp_rate' => 0.30,
+                   'name' => 'Bertahap 12 Bulan',
+                   'dp_rate' => 0.10,
                    'discount_rate' => 0,
                    'credit_duration' => 12,
                    'description'  => '
@@ -54,8 +54,8 @@ class PaymentMethodSeeder extends Seeder
                PaymentMethod::create([
                    'code' => 4,
                    'discount_rate' => 0,
-                   'dp_rate' => 0.30,
-                   'name' => 'kpr bank',
+                   'dp_rate' => 0.10,
+                   'name' => 'Kpr Bank',
                    'credit_duration' => null,
                    'description'  => '
                     1. Pedagang Membayar Booking Fee sebesar Rp. 10.000.000 <br>

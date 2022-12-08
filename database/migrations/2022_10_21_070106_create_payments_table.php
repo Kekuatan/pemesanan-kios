@@ -18,8 +18,11 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('product_id')->default(null)->nullable()->constrained('products');
             $table->date('payment_date');
             $table->boolean('verify')->default(0);
+            $table->text('note')->nullable();
+            $table->foreignUUId('user_id')->default(null)->nullable()->constrained('users');
             $table->unsignedBigInteger('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

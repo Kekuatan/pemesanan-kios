@@ -16,4 +16,9 @@ class Payment extends Model
      * @var array<int, string>
      */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    public function user()
+    {
+        return  $this->belongsTo(User::class);
+    }
+
 }

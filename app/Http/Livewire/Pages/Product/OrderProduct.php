@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class OrderProduct extends Component
 {
-    public $no_siptu_or_shptu = '194';
+    public $no_siptu_or_shptu = 'asb';
     public $products =[];
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -26,8 +26,8 @@ class OrderProduct extends Component
         if(strlen($query) < 3){
             return [];
         }
-        $products = Product::where('shptu_no', 'like', '%' . $query . '%')
-            ->orWhere('siptu_no', 'like', '%' . $query . '%')->limit(10)->get();
+        $products = Product::where('tu_no', 'like', '%' . $query . '%')
+            ->orWhere('tu_no', 'like', '%' . $query . '%')->limit(10)->get();
         if (blank($products)){
             return [];
         }
