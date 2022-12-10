@@ -15,19 +15,28 @@ class PaymentProviderSeeder extends Seeder
     public function run()
     {
         PaymentProvider::create([
-            'code' => 1,
-            'name' => 'bca',
-            'payment_type_id' => 2
+            'code' => '129.000.1314.1128',
+            'name' => 'Mandiri',
+            "type" => 'va'
+//            'payment_type_id' => 2
         ]);
         PaymentProvider::create([
-            'code' => 2,
-            'name' => 'mandiri',
-            'payment_type_id' => 2
-        ]);
-        PaymentProvider::create([
-            'code' => 3,
+            'code' => '88.9988.759',
             'name' => 'bni',
-            'payment_type_id' => 2
+            "type" => 'va'
+//            'payment_type_id' => 2
+        ]);
+        PaymentProvider::create([
+            'code' => '0442.01.00.1856.305',
+            'name' => 'bri',
+            "type" => 'va',
+            'is_default' => 1
+//            'payment_type_id' => 2
+        ]);
+        PaymentProvider::create([
+            'code' => '1080.8181.219',
+            'name' => 'dki',
+            'type' => 'va',
         ]);
     }
 }

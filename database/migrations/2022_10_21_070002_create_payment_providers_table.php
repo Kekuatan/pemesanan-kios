@@ -15,9 +15,12 @@ class CreatePaymentProvidersTable extends Migration
     {
         Schema::create('payment_providers', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('code')->nullable()->unique();
             $table->string('name');
-            $table->foreignId('payment_type_id')->constrained('payment_types');
+            $table->string('type')->nullable();
+            $table->boolean('is_default')->default(0);
+            $table->boolean('status')->default(1);
+//            $table->foreignId('payment_type_id')->nullable()->constrained('payment_types');
 
             $table->timestamps();
             $table->softDeletes();

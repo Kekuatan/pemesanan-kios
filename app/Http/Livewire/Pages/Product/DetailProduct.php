@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pages\Product;
 
 use App\Enums\PriceListEnum;
 use App\Models\Payment;
+use App\Models\PaymentProvider;
 use App\Models\PriceList;
 use App\Models\Product;
 use App\Traits\Livewire\AlertifyTrait;
@@ -60,6 +61,12 @@ class DetailProduct extends Component
     public $ppn_rate;
     public $ppn;
     public $terbilang;
+    public $paymentProviders;
+    public $paymentProviderId;
+    public $paymentProviderSelected;
+    public $lastPayment;
+    public $lastPaymentAmount;
+    public $lastPaymentAmountText;
 
     public $inputs;
 
@@ -68,6 +75,11 @@ class DetailProduct extends Component
     public function mount()
     {
         self::mountData();
+    }
+
+    public function updatedpaymentProviderId()
+    {
+        $this->paymentProviderSelected = collect($this->paymentProviders)->where('id', '==', $this->paymentProviderId)->first();
     }
 
     public function updatedInputs()
@@ -132,7 +144,7 @@ class DetailProduct extends Component
 
             $this->dp = floor($this->total_price * $this->price_list ['payment_method']['dp_rate']);
             $this->dp_text = 'Rp. ' . number_format($this->dp, 2, ',', '.');
-            $this->dp_status = ($this->sum_payment + $this->payment) >= $this->dp  ? 1 : 0;
+            $this->dp_status = ($this->sum_payment + $this->payment) >= $this->dp ? 1 : 0;
 
             $this->left_payment = $this->total_price - $this->payment - $this->sum_payment;
             $this->left_payment_text = 'Rp. ' . number_format($this->left_payment, 2, ',', '.');
@@ -152,7 +164,8 @@ class DetailProduct extends Component
                     'payment_date' => Carbon::now()->toDateString(),
                     'product_id' => $this->product->id,
                     "user_id" => $this->user->id,
-                    'note' => $this->note
+                    "payment_provider_id" => $this->paymentProviderId,
+                    'note' => $this->paymentProviderSelected['name'] . " " . $this->paymentProviderSelected['code']. " ". $this->note
                 ]);
             }
 
@@ -182,7 +195,16 @@ class DetailProduct extends Component
 
         $this->showPrint = false;
         $this->user = Auth::guard('web')->user();
-        $this->product = Product::where('id', $this->productId)->with('payments.user')->with('priceList')->first();
+        $this->product = Product::where('id', $this->productId)
+            ->with(['payments' => function ($query) {
+                $query->with('user')->with('paymentProvider');
+            }])
+//            ->with('payments.user')->with('payments.paymentProvider')
+            ->with('priceList')->first();
+        $this->paymentProviders = PaymentProvider::get();
+        $this->paymentProviderId = (collect($this->paymentProviders)->where('is_default', '==', 1)->first())['id'];
+        $this->paymentProviderSelected = collect($this->paymentProviders)->where('id', '==', $this->paymentProviderId)->first();
+
         $this->payments = $this->product->payments;
 
         $this->sum_payment = blank($this->payments) ? 0 : collect($this->payments)->sum('amount');
@@ -196,7 +218,15 @@ class DetailProduct extends Component
         $this->address = $this->product->siho_address;
         $this->dp = null;
 
+        if(!blank($this->payments)){
+
+        $this->lastPayment = (collect($this->payments)->last());
+        $this->lastPaymentAmount = $this->lastPayment['amount'];
+        $this->lastPaymentAmountText = 'Rp. ' .number_format($this->lastPaymentAmount, 2, ',', '.');
+    }
+
         $this->terbilang = blank($this->payments) ? '' : self::getTerbilang(collect($this->payments)->last()['amount']);
+
         $this->inputs = [
             "name" => "",
             "ktpNo" => "",

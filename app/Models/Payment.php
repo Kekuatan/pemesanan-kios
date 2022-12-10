@@ -21,4 +21,10 @@ class Payment extends Model
         return  $this->belongsTo(User::class);
     }
 
+    public function paymentProvider()
+    {
+        return  $this->belongsTo(PaymentProvider::class);
+    }
+
+
 }

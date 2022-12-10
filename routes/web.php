@@ -28,7 +28,7 @@ Route::group([
     Route::get('/', Login::class);
 });
 
-Route::post('/logout', LogoutController::class)->name('logout');
+Route::get('/logout', LogoutController::class)->name('logout');
 
 Route::group([
     'prefix' => '/dashboard',
@@ -44,7 +44,7 @@ Route::group([
     'as' => 'product'
 ], function () {
     Route::get('/', Dashboard::class);
-    Route::get('/order', OrderProduct::class)->name('.order');
+    Route::get('/order', OrderProduct::class)->name('.order')->name('order');
     Route::get('/list', ListProduct::class)->name('.list');
     Route::get('/detail', DetailProduct::class)->name('.detail');
 });

@@ -21,6 +21,8 @@ class CreatePaymentsTable extends Migration
             $table->text('note')->nullable();
             $table->foreignUUId('user_id')->default(null)->nullable()->constrained('users');
             $table->unsignedBigInteger('amount');
+
+            $table->foreignId('payment_provider_id')->default(null)->nullable()->constrained('payment_providers');
             $table->timestamps();
             $table->softDeletes();
         });

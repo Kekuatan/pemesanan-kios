@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\PriceList;
 use App\Models\Product;
+use App\Models\PaymentProvider;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -59212,6 +59213,7 @@ class ProductSeeder extends Seeder
 
         foreach ($products as $product) {
             $product = collect($product)->except(['Column30','Column31','Column32','Column33','Column34','Column35'])->all();
+
             foreach ($product as $key => $value) {
                 $product[$key] = trim(strtolower($value));
             }
