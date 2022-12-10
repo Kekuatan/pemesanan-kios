@@ -6,6 +6,7 @@ use App\Http\Livewire\Pages\Login;
 use App\Http\Livewire\Pages\Product\DetailProduct;
 use App\Http\Livewire\Pages\Product\OrderProduct;
 use App\Http\Livewire\Pages\Product\ListProduct;
+use App\Http\Livewire\Pages\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,7 @@ Route::group([
     'as' => 'dashboard'
 ], function () {
     Route::get('/', Dashboard::class);
+    Route::get('/user', User::class);
 });
 
 Route::group([
