@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pages;
 
 use App\Traits\Livewire\AlertifyTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -23,10 +24,19 @@ class Login extends Component
 
     public function submit()
     {
-        Auth::guard('web')->logout();
-        Session::flush();
+
+
+
 
         $payload = ["email" => $this->username, "password" => $this->password];
+
+        $user = \App\Models\User::where('email', $this->username)->first();
+        if ($user&& \Illuminate\Support\Facades\Hash::check($this->password, $user->password)) {
+            Auth::logoutOtherDevices($this->password);
+            Auth::guard('web')->logoutOtherDevices($this->password);
+            Auth::logout();
+            Session::flush();
+        }
 
         if (Auth::guard('web')->attempt($payload)) {
             return redirect()->route('dashboard');
