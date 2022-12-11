@@ -4,7 +4,7 @@
             <div class="auth-wrapper auth-v2">
                 <div class="row auth-inner m-0">
                     <div class="d-none d-lg-flex align-items-center p-5 col-lg-8">
-                        <img src="http://pemesanan-kios.test/logo/rapik.png" width="500px" style="margin: auto; margin-top: 20%">
+                        <img src="{{asset('logo/rapik.png')}}" width="500px" style="margin: auto; margin-top: 20%">
                     </div>
                     <div class="d-flex align-items-center auth-bg px-2 p-lg-5 col-lg-4">
                         <div class="px-xl-2 mx-auto col-sm-8 col-md-6 col-lg-12"><h2
