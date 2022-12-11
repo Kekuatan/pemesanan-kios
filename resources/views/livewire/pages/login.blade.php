@@ -13,7 +13,7 @@
                     </div>
                     <div class="d-flex align-items-center auth-bg px-2 p-lg-5 col-lg-4">
                         <div class="px-xl-2 mx-auto col-sm-8 col-md-6 col-lg-12"><h2
-                                class="card-title mb-1 font-weight-bold"> Welcome to Vuexy! 👋 </h2>
+                                class="card-title mb-1 font-weight-bold"> Welcome to Vuexy! 👋   </h2>
                             <p class="card-text mb-2"> Please sign-in to your account and start the adventure </p>
                             <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-primary"><!---->
                                 <div class="alert-body font-small-2"><p><small class="mr-50"><span
