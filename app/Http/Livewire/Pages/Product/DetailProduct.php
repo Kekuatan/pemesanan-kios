@@ -177,7 +177,8 @@ class DetailProduct extends Component
                 "siho_tlp" => $this->phoneNumber,
                 "siho_address" => $this->address,
                 "discount_rate" => $this->inputs['discount_rate'] / 100,
-                "status" => $this->left_payment <= 0 ? 1 : 0
+                "status" => $this->left_payment <= 0 ? 1 : 0,
+                "total_price" => $this->total_price
             ];
 
             $this->product->update($payload);

@@ -41,7 +41,7 @@
 
         <div class="container text-center">
             <div class="row row-cols-4 align-items-center">
-                <div class="col" wire:click.prevent="menu('/product/order')">
+                <div class="col" wire:click="menu('/product/order')">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">
@@ -126,7 +126,7 @@
                         </div><!----><!---->
                     </div>
                 </div>
-                <div class="col" wire:click.prevent="menu('/dashboard/user')">
+                <div class="col" wire:click.prevent="menu('/admin/user')">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">
@@ -140,7 +140,7 @@
                         </div><!----><!---->
                     </div>
                 </div>
-                <div class="col" wire:click.prevent="menu('/dashboard/verifikasi-pembayaran')">
+                <div class="col" wire:click.prevent="menu('/kwitansi-team/verifikasi-payment')">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">

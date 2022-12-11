@@ -7,6 +7,8 @@ use App\Http\Livewire\Pages\Product\DetailProduct;
 use App\Http\Livewire\Pages\Product\OrderProduct;
 use App\Http\Livewire\Pages\Product\ListProduct;
 use App\Http\Livewire\Pages\User;
+use App\Http\Livewire\Pages\VerifikasiPayment;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +39,22 @@ Route::group([
     'as' => 'dashboard'
 ], function () {
     Route::get('/', Dashboard::class);
+});
+
+Route::group([
+    'prefix' => '/admin',
+    'middleware' =>['auth:web'], //['auth:staff', 'logging-web', 'twofa'],
+    'as' => 'admin'
+], function () {
     Route::get('/user', User::class);
+});
+
+Route::group([
+    'prefix' => '/kwitansi-team',
+    'middleware' =>['auth:web'], //['auth:staff', 'logging-web', 'twofa'],
+    'as' => 'kwitansi-team'
+], function () {
+    Route::get('/verifikasi-payment', VerifikasiPayment::class);
 });
 
 Route::group([

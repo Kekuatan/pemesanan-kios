@@ -12,7 +12,6 @@ class Dashboard extends Component
     public function __construct()
     {
         $this->user = Auth::guard('web')->user();
-
     }
 
     public function menu($page){

@@ -53,6 +53,7 @@ class CreateProductsTable extends Migration
 
 
             $table->unsignedTinyInteger("status")->default(0);
+            $table->unsignedBigInteger("total_price")->nullable();
             $table->date("due_date")->default(null)->nullable();
             $table->unsignedBigInteger('dp')->nullable();
             $table->decimal('discount_rate')->nullable();
