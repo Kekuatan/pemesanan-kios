@@ -3,7 +3,7 @@
         <div class="row content-header">
             <div class="bredcumb-header-dasboard content-header-left mb-2 col-md-9 col-12">
                 <div class="row breadcrumbs-top">
-                    <div class="col-12"><h2 class="content-header-title float-left pr-1 mb-0"> Form Validation </h2>
+                    <div class="col-12"><h2 class="content-header-title float-left pr-1 mb-0"> Pemesanan Kios</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/dashboard')}}"
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="col" wire:click.prevent="menu('/product/list')">
+                <div class="col">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">

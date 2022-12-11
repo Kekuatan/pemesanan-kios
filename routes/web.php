@@ -64,6 +64,6 @@ Route::group([
 ], function () {
     Route::get('/', Dashboard::class);
     Route::get('/order', OrderProduct::class)->name('.order')->name('order');
-    Route::get('/list', ListProduct::class)->name('.list');
+//    Route::get('/list', ListProduct::class)->name('.list');
     Route::get('/detail', DetailProduct::class)->name('.detail');
 });

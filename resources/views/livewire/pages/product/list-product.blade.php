@@ -5,7 +5,7 @@
         <div class="row content-header">
             <div class="bredcumb-header-dasboard content-header-left mb-2 col-md-9 col-12">
                 <div class="row breadcrumbs-top">
-                    <div class="col-12"><h2 class="content-header-title float-left pr-1 mb-0"> Form Validation </h2>
+                    <div class="col-12"><h2 class="content-header-title float-left pr-1 mb-0"> Pemesanan Kios</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#"
@@ -21,7 +21,7 @@
                                     </a></li>
                                 <li class="breadcrumb-item"><a href="#" target="_self" class=""> Forms </a></li>
                                 <li class="breadcrumb-item active"><span
-                                        aria-current="location"> Form Validation </span></li>
+                                        aria-current="location"> Pemesanan Kios</span></li>
                             </ol>
                         </div>
                     </div>
