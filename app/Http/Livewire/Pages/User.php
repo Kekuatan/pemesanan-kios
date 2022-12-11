@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Pages;
 
 use App\Traits\Livewire\AlertifyTrait;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class User extends Component
@@ -19,7 +20,7 @@ class User extends Component
             \App\Models\User::create([
                 "name" => $this->name,
                 "email" => $this->email,
-                "password" => $this->password,
+                "password" => Hash::make($this->password)
             ]);
             $this->alertifyError('success', 'Pembuatan success');
         } catch (\Exception $exception){

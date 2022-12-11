@@ -322,6 +322,7 @@
                 <div data-v-36ff53bc="" class="invoice-actions col-md-4 col-xl-3 col-12">
                     <div data-v-36ff53bc="" class="card"><!----><!---->
                         <div data-v-36ff53bc="" class="card-body"><!----><!---->
+                            <label for="staticEmail" class="col-sm-8 col-form-label">Pilih Pembayaran</label>
                             <div class="mb-75">
                                 <select wire:model="inputs.price_list_id" class="custom-select">
                                     <option disabled="disabled" value="" selected>--- Pilih jenis pembayaran---</option>
@@ -330,21 +331,23 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-75">
-                                <select wire:model="paymentProviderId" class="custom-select">
-                                    <option disabled="disabled" value="" selected>--- Pilih Bank---</option>
-                                    @foreach ($paymentProviders as $paymentProvider)
-                                        @if($paymentProvider->id == $paymentProviderId)
-                                            <option selected
-                                                    value="{{$paymentProvider->id}}">{{$paymentProvider->name . ' ' , $paymentProvider->type}}</option>
-                                        @else
-                                            <option
-                                                value="{{$paymentProvider->id}}">{{$paymentProvider->name . ' ' , $paymentProvider->type}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
+
                             @if(!blank($inputs["price_list_id"]))
+                                <div class="mb-75">
+                                    <label for="staticEmail" class="col-sm-8 col-form-label">Pilih Bank</label>
+                                    <select wire:model="paymentProviderId" class="custom-select">
+                                        <option disabled="disabled" value="" selected>--- Pilih Bank---</option>
+                                        @foreach ($paymentProviders as $paymentProvider)
+                                            @if($paymentProvider->id == $paymentProviderId)
+                                                <option selected
+                                                        value="{{$paymentProvider->id}}">{{$paymentProvider->name . ' ' , $paymentProvider->type}}</option>
+                                            @else
+                                                <option
+                                                    value="{{$paymentProvider->id}}">{{$paymentProvider->name . ' ' , $paymentProvider->type}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="mb-75 ">
                                     <label for="staticEmail" class="col-sm-8 col-form-label">Nama</label>
                                     <div class="">
@@ -411,6 +414,7 @@
 
 
 
+                                @if(!blank($payments))
                                 <button onclick="printBuktiPemesanan()" data-v-36ff53bc="" type="button"
                                         class="btn mb-75 btn-primary btn-block collapsed"
                                         aria-expanded="false" aria-controls="sidebar-send-invoice"
@@ -422,6 +426,7 @@
                                         aria-expanded="false" aria-controls="sidebar-send-invoice"
                                         style="overflow-anchor: none;"> Print kwitansi
                                 </button>
+                                @endif
 
                                 <button wire:click="save" data-v-36ff53bc=""
                                         type="button"
@@ -497,15 +502,18 @@
         {{--        </table>--}}
         <div class="kwitansi-content">
             <div class="row kwitansi-head">
+                <div class="col-md-2">
+                    <img src="{{asset('logo/rapik.png')}}" width="100%" style="float: left">
+                </div>
                 <div class="col-md-6">
                     <span
-                        style="font-size: 20px; font-weight: bolder; margin-bottom: 10px"> PT. Rapik Karya mandiri </span>
+                        style="font-size: 20px; font-weight: bolder; margin-bottom: 10px"> PT. Rapik Karya Mandiri </span>
                     <br>
                     Graha Rapik-De Estrella No.1 Jl. Raya Pekapuran<br>
                     Telp/Fax 021 8770999 Email : rapikkm@gmail.com <br>
                     Website : www.rapik.co.id
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="row" style="font-size: 20px; font-weight: bolder; margin-bottom: 10px">
                         KWITANSI
                     </div>
@@ -563,21 +571,31 @@
                         </div>
                     </div>
                     <div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                Status DP <span class="" style="float: right"> :</span>
-                            </div>
-                            <div class="col-md-9 mb-2">
-                                {{$dp_status ? 'Lunas' : ' Belum lunas'}}
-                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
-                            </div>
-                        </div>
+{{--                        <div class="row">--}}
+{{--                            <div class="col-md-3">--}}
+{{--                                Status DP <span class="" style="float: right"> :</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-9 mb-2">--}}
+{{--                                {{$dp_status ? 'Lunas' : ' Belum lunas'}}--}}
+{{--                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row">--}}
+{{--                            <div class="col-md-3">--}}
+{{--                                Sisa pembayaran <span class="" style="float: right"> :</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-9 mb-2">--}}
+{{--                                {{$left_payment_text}}--}}
+{{--                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
             <div class="row kwitansi-footer" style="margin-top: 40px">
                 <div class="col-md-6">
-                    <div class="kwitansi-footer-rp">
+                    <div class="kwitansi-footer-rp text-center" style="font-size: 24px">
                         {{$lastPaymentAmountText}}
                     </div>
 
