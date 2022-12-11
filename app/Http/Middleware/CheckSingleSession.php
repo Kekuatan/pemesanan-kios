@@ -20,7 +20,12 @@ class CheckSingleSession
     public function handle($request, Closure $next)
     {
 
-        $previous_session = Auth::guard('web')->user()->session_id;
+        $previous_session = Auth::guard('web')->user();
+        if (blank($previous_session)){
+            return $next($request);
+        } else {
+            $previous_session = $previous_session->session_id;
+        }
         if ($previous_session !== Session::getId()) {
 
             Session::getHandler()->destroy($previous_session);
