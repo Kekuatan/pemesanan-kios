@@ -24,19 +24,13 @@ class Login extends Component
 
     public function submit()
     {
-
-
-
-
         $payload = ["email" => $this->username, "password" => $this->password];
-
-        $user = \App\Models\User::where('email', $this->username)->first();
-        if ($user&& \Illuminate\Support\Facades\Hash::check($this->password, $user->password)) {
-            Auth::logoutOtherDevices($this->password);
-            Auth::guard('web')->logoutOtherDevices($this->password);
-            Auth::logout();
-            Session::flush();
-        }
+//        $user = \App\Models\User::where('email', $this->username)->first();
+//        if ($user&& \Illuminate\Support\Facades\Hash::check($this->password, $user->password)) {
+//            Auth::guard('web')->logoutOtherDevices($this->password);
+//            Auth::logout();
+//            Session::flush();
+//        }
 
         if (Auth::guard('web')->attempt($payload)) {
             return redirect()->route('dashboard');

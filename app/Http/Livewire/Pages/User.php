@@ -23,6 +23,9 @@ class User extends Component
                 "password" => Hash::make($this->password)
             ]);
             $this->alertifyError('success', 'Pembuatan success');
+            $this->name=null;
+            $this->email=null;
+            $this->password=null;
         } catch (\Exception $exception){
             $this->alertifyError('error', 'Pembuatan gagal');
         }
