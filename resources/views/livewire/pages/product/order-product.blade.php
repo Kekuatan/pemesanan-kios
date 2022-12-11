@@ -105,8 +105,6 @@
                     {{--                </div><!---->--}}
                 </div><!----><!----><!---->
             </div>
-            {{$no_siptu_or_shptu}}
-            {{count($products)}}
         </fieldset>
 
 

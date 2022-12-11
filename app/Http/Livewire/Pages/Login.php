@@ -11,8 +11,8 @@ use Livewire\Component;
 class Login extends Component
 {
     use AlertifyTrait;
-    public $username = 'admin@admin.com';
-    public $password = 'admin';
+    public $username = '';
+    public $password = '';
 
     public function __construct()
     {

@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class OrderProduct extends Component
 {
-    public $no_siptu_or_shptu = 'asb';
+    public $no_siptu_or_shptu = '';
     public $products =[];
     protected $listeners = ['refreshComponent' => '$refresh'];
 
