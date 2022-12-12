@@ -67,6 +67,7 @@ class DetailProduct extends Component
     public $lastPayment;
     public $lastPaymentAmount;
     public $lastPaymentAmountText;
+    public $briva;
 
     public $inputs;
 
@@ -181,6 +182,10 @@ class DetailProduct extends Component
                 "total_price" => $this->total_price
             ];
 
+            if($this->briva !== $this->product->briva){
+                $payload['briva'] = $this->briva;
+            }
+
             $this->product->update($payload);
             $this->showPrint = true;
             $this->alertifyError('success', 'Success');
@@ -202,6 +207,8 @@ class DetailProduct extends Component
             }])
 //            ->with('payments.user')->with('payments.paymentProvider')
             ->with('priceList')->first();
+
+        $this->briva = $this->product->briva;
         $this->paymentProviders = PaymentProvider::get();
         $this->paymentProviderId = (collect($this->paymentProviders)->where('is_default', '==', 1)->first())['id'];
         $this->paymentProviderSelected = collect($this->paymentProviders)->where('id', '==', $this->paymentProviderId)->first();

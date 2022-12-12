@@ -145,7 +145,7 @@
                                                 <tr data-v-36ff53bc="">
                                                     <td data-v-36ff53bc="" class="pr-1"> VA:</td>
                                                     <td data-v-36ff53bc="" class="pr-1"> :</td>
-                                                    <td data-v-36ff53bc="">{{$product->briva}}</td>
+                                                    <td data-v-36ff53bc="">{{$briva}}</td>
                                                 </tr>
                                                 <tr data-v-36ff53bc="">
                                                     <td data-v-36ff53bc="" class="pr-1"> Type:</td>
@@ -349,6 +349,15 @@
                                     </select>
                                 </div>
                                 <div class="mb-75 ">
+                                    <label for="staticEmail" class="col-sm-8 col-form-label">Briva</label>
+                                    <div class="">
+                                        <input type="text"
+                                               class="right-input form-control invoice-edit-input flatpickr-input"
+                                               class="form-control-plaintext"
+                                               placeholder="{{$briva}}" wire:model="briva">
+                                    </div>
+                                </div>
+                                <div class="mb-75 ">
                                     <label for="staticEmail" class="col-sm-8 col-form-label">Nama</label>
                                     <div class="">
                                         <input type="text"
@@ -414,7 +423,7 @@
 
 
 
-                                @if(!blank($payments))
+
                                 <button onclick="printBuktiPemesanan()" data-v-36ff53bc="" type="button"
                                         class="btn mb-75 btn-primary btn-block collapsed"
                                         aria-expanded="false" aria-controls="sidebar-send-invoice"
@@ -434,7 +443,6 @@
                                         aria-expanded="false" aria-controls="sidebar-send-invoice"
                                         style="overflow-anchor: none;"> Save
                                 </button>
-                            @endif
 
 
                         </div><!----><!----></div>
