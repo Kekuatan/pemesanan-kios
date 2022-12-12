@@ -41,7 +41,7 @@
 
         <div class="container text-center">
             <div class="row row-cols-4 align-items-center">
-                <div class="col" wire:click="menu('/product/order')">
+                <a class="col" href="{{url('/product/order')}}" style="text-decoration: none; color: black">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">
@@ -54,7 +54,7 @@
                             <p class="card-text icon-name text-truncate mb-0 mt-1"> Pemesanan Kios </p>
                         </div><!----><!---->
                     </div>
-                </div>
+                </a>
                 <div class="col">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
@@ -126,7 +126,7 @@
                         </div><!----><!---->
                     </div>
                 </div>
-                <div class="col" wire:click.prevent="menu('/admin/user')">
+                <a class="col" href="{{url('/admin/user')}}" style="text-decoration: none; color: black">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">
@@ -139,8 +139,8 @@
                             <p class="card-text icon-name text-truncate mb-0 mt-1"> Membuat pengguna </p>
                         </div><!----><!---->
                     </div>
-                </div>
-                <div class="col" wire:click.prevent="menu('/kwitansi-team/verifikasi-payment')">
+                </a>
+                <a class="col" href="{{url('/kwitansi-team/verifikasi-payment')}}" style="text-decoration: none; color: black">
                     <div class="card icon-card cursor-pointer text-center mb-2 mx-50"><!----><!---->
                         <div class="card-body"><!----><!---->
                             <div class="icon-wrapper">
@@ -153,9 +153,11 @@
                             <p class="card-text icon-name text-truncate mb-0 mt-1"> Verifikasi pembayaran </p>
                         </div><!----><!---->
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
+
+
 
 </div>

@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             PaymentTypeSeeder::class,
             PaymentProviderSeeder::class,
             PriceListSeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            History20221210::class
         ]);
     }
 }

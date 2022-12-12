@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Traits\Livewire\AlertifyTrait;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class DetailProduct extends Component
@@ -67,7 +68,13 @@ class DetailProduct extends Component
     public $lastPayment;
     public $lastPaymentAmount;
     public $lastPaymentAmountText;
+    public $discount_price;
+    public $discount_price_text;
+    public $payment_selected;
+    public $payment_selected_id;
     public $briva;
+    public $verify_payment;
+    public $kwitansi_date;
 
     public $inputs;
 
@@ -83,11 +90,28 @@ class DetailProduct extends Component
         $this->paymentProviderSelected = collect($this->paymentProviders)->where('id', '==', $this->paymentProviderId)->first();
     }
 
+    public function updatedPaymentSelectedId()
+    {
+        $this->payment_selected = collect($this->payments)->where('id', '==', $this->payment_selected_id)->first();
+        $this->verify_payment = $this->payment_selected->verify;
+        $this->kwitansi_date = date('d-m-Y', strtotime($this->payment_selected->kwitansi_date));
+    }
+
     public function updatedInputs()
 
     {
         if (!blank($this->inputs['price_list_id']) && $this->inputs['price_list_id'] !== $this->price_list_id) {
             self::watchInputData();
+        }
+
+        if (!blank($this->dp) && $this->dp !== $this->inputs["dp"]) {
+            $this->inputs["dp"] = preg_replace("/[^0-9]/", "", $this->inputs["dp"]);
+            if (blank($this->inputs['dp'])) {
+                $this->dp_text = 'Rp. 0,00';
+            } else {
+                $this->dp = $this->inputs["dp"];
+                $this->dp_text = 'Rp. ' . number_format($this->inputs["dp"], 2, ',', '.');
+            }
         }
 
         if (!blank($this->dp) && $this->dp !== $this->inputs["dp"]) {
@@ -121,19 +145,45 @@ class DetailProduct extends Component
             }
         }
 
+        if (blank($this->inputs['discount_rate'])) {
+            $updateDiscountRate = $this->discount_rate !== $this->inputs["discount_rate"];
+        } else {
+            $updateDiscountRate = $this->discount_rate !== $this->inputs["discount_rate"] / 100;
+        }
 
-        if (blank($this->inputs['discount_rate']) || (!blank($this->discount_rate) && $this->discount_rate !== $this->inputs["discount_rate"] / 100)) {
-            $this->inputs["discount_rate"] = preg_replace("/[^0-9]/", "", $this->inputs["discount_rate"]);
+        $updateDiscountPrice = !blank(optional($this->inputs)['discount_price']) || $this->discount_price !== optional($this->inputs)["discount_price"];
 
-            if (blank($this->inputs['discount_rate'])) {
-                $this->inputs["discount_rate"] = null;
-                $this->discount_rate_text = '0%';
-                $this->discount = 0;
-            } else {
-                $this->discount = floor($this->price * ($this->inputs["discount_rate"] / 100));
-                $this->discount_rate_text = ($this->inputs["discount_rate"]) . '%';
-
+        if ($updateDiscountRate || $updateDiscountPrice) {
+            if ($updateDiscountRate) {
+                $this->inputs["discount_rate"] = preg_replace("/[^0-9]/", "", $this->inputs["discount_rate"]);
+                if (blank($this->inputs['discount_rate'])) {
+                    $this->inputs["discount_rate"] = null;
+                    $this->discount_rate = 0;
+                    $this->discount_rate_text = '0%';
+                    $this->discount = 0 + $this->discount_price;
+                } else {
+                    $this->discount = floor($this->price * ($this->inputs["discount_rate"] / 100)) + $this->discount_price;
+                    $this->discount_rate = ($this->inputs["discount_rate"]) / 100;
+                    $this->discount_rate_text = ($this->inputs["discount_rate"]) . '%';
+                }
             }
+            if ($updateDiscountPrice) {
+                if (!blank(optional($this->inputs)["discount_price"])) {
+                    $this->inputs["discount_price"] = preg_replace("/[^0-9]/", "", $this->inputs["discount_price"]);
+                }
+                if (blank(optional($this->inputs)['discount_price'])) {
+                    $this->inputs["discount_price"] = null;
+                    $this->discount_price = null;
+                    $this->discount_price_text = 'Rp.0,00';
+                    $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
+                } else {
+                    $this->discount_price = $this->inputs["discount_price"];
+                    $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
+                    $this->discount_price_text = 'Rp. ' . number_format($this->discount_price, 2, ',', '.');
+
+                }
+            }
+
 
             $this->price_with_discount = floor(($this->price - $this->discount));
             $this->price_with_discount_text = 'Rp. ' . number_format($this->price_with_discount, 2, ',', '.');
@@ -159,14 +209,16 @@ class DetailProduct extends Component
     public function save()
     {
         try {
+            DB::beginTransaction();
             if (!blank($this->inputs['payment']) && $this->inputs['payment'] != 0) {
                 Payment::create([
                     'amount' => $this->inputs['payment'],
+                    'kwitansi_date' => (new Carbon($this->kwitansi_date))->format('Y-m-d'),
                     'payment_date' => Carbon::now()->toDateString(),
                     'product_id' => $this->product->id,
                     "user_id" => $this->user->id,
                     "payment_provider_id" => $this->paymentProviderId,
-                    'note' => $this->paymentProviderSelected['name'] . " " . $this->paymentProviderSelected['code']. " ". $this->note
+                    'note' => $this->note
                 ]);
             }
 
@@ -177,12 +229,12 @@ class DetailProduct extends Component
                 "siho_ktp_no" => $this->ktpNo,
                 "siho_tlp" => $this->phoneNumber,
                 "siho_address" => $this->address,
-                "discount_rate" => $this->inputs['discount_rate'] / 100,
+                "discount_rate" => $this->inputs['discount_rate'] / 100 == $this->price_list ['payment_method']['discount_rate']? null : $this->inputs['discount_rate'] / 100,
                 "status" => $this->left_payment <= 0 ? 1 : 0,
                 "total_price" => $this->total_price
             ];
 
-            if($this->briva !== $this->product->briva){
+            if ($this->briva !== $this->product->briva) {
                 $payload['briva'] = $this->briva;
             }
 
@@ -190,14 +242,32 @@ class DetailProduct extends Component
             $this->showPrint = true;
             $this->alertifyError('success', 'Success');
             self::mountData();
+            DB::commit();
         } catch (\Exception $exception) {
+            DB::rollBack();
             $this->alertifyError('error', 'Database error');
             dd($exception->getMessage());
         }
     }
 
+    public function saveKwitansi()
+    {
+        try {
+            DB::beginTransaction();
+            Payment::where('id', $this->payment_selected_id)->update([
+                'kwitansi_date' => (new Carbon($this->kwitansi_date))->format('Y-m-d'),
+                'verify' => $this->verify_payment,
+            ]);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+        }
+    }
+
     private function mountData()
     {
+
 
         $this->showPrint = false;
         $this->user = Auth::guard('web')->user();
@@ -225,13 +295,18 @@ class DetailProduct extends Component
         $this->phoneNumber = $this->product->siho_tlp;
         $this->address = $this->product->siho_address;
         $this->dp = null;
+        $this->verify_payment = 0;
 
-        if(!blank($this->payments)){
+        if (!blank($this->payments)) {
 
-        $this->lastPayment = (collect($this->payments)->last());
-        $this->lastPaymentAmount = $this->lastPayment['amount'];
-        $this->lastPaymentAmountText = 'Rp. ' .number_format($this->lastPaymentAmount, 2, ',', '.');
-    }
+            $this->lastPayment = (collect($this->payments)->last());
+            $this->payment_selected = (collect($this->payments)->last());
+            $this->verify_payment = $this->payment_selected['verify'];
+            $this->payment_selected_id = (collect($this->payments)->last())['id'];
+            $this->kwitansi_date = date('d-m-Y', strtotime($this->payment_selected['kwitansi_date']));
+            $this->lastPaymentAmount = $this->lastPayment['amount'];
+            $this->lastPaymentAmountText = 'Rp. ' . number_format($this->lastPaymentAmount, 2, ',', '.');
+        }
 
         $this->terbilang = blank($this->payments) ? '' : self::getTerbilang(collect($this->payments)->last()['amount']);
 
@@ -269,8 +344,11 @@ class DetailProduct extends Component
         $this->inputs['discount_rate'] = floor($this->discount_rate * 100);
         $this->discount_rate_text = ($this->discount_rate * 100) . '%';
 
+        $this->discount_price = $this->product->discount_price;
+        $this->discount_price_text = 'Rp. ' . number_format($this->discount_price, 2, ',', '.');
 
-        $this->discount = floor($this->price * $this->discount_rate);
+
+        $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
         $this->discount_text = 'Rp. ' . number_format($this->discount, 2, ',', '.');
 
 
@@ -301,6 +379,7 @@ class DetailProduct extends Component
         $this->dp_status = ($this->sum_payment + $this->payment) >= $this->dp ? 1 : 0;
         $this->left_payment = $this->total_price - $this->sum_payment;
         $this->left_payment_text = 'Rp. ' . number_format($this->left_payment, 2, ',', '.');
+
 
     }
 
@@ -334,7 +413,7 @@ class DetailProduct extends Component
         return $temp;
     }
 
-    private function getTerbilang($nilai)
+    public function getTerbilang($nilai)
     {
         if ($nilai < 0) {
             $hasil = "minus " . trim(self::penyebut($nilai));

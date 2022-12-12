@@ -45,7 +45,7 @@ class CreateProductsTable extends Migration
             $table->string("shptu_no")->nullable();
             $table->string("shptu_start_at")->nullable();
 
-            $table->string('briva')->unique()->nullable();
+            $table->string('briva')->nullable();
 
             $table->string("merchant_name")->nullable();
             $table->string("merchant_tlp")->nullable();
@@ -57,6 +57,7 @@ class CreateProductsTable extends Migration
             $table->date("due_date")->default(null)->nullable();
             $table->unsignedBigInteger('dp')->nullable();
             $table->decimal('discount_rate')->nullable();
+            $table->unsignedBigInteger('discount_price')->nullable();
             $table->foreignId('customer_id')->default(null)->nullable()->constrained('customers');
             $table->foreignId('price_list_id')->default(null)->nullable()->constrained('price_lists');
 

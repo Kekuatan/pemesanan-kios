@@ -38,5 +38,9 @@ class PaymentProviderSeeder extends Seeder
             'name' => 'dki',
             'type' => 'va',
         ]);
+        PaymentProvider::create([
+            'name' => 'cash',
+            'type' => 'cash',
+        ]);
     }
 }

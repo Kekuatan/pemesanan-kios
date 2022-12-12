@@ -16,7 +16,8 @@
                                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                         </svg>
                                     </a></li>
-                                <li class="breadcrumb-item"><a href="{{ url('/product/order') }}" target="_self" class="">  Pemesanan kios </a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/product/order') }}" target="_self"
+                                                               class=""> Pemesanan kios </a></li>
                                 <li class="breadcrumb-item active"><span
                                         aria-current="location"> Form pemesanan</span></li>
                             </ol>
@@ -28,10 +29,10 @@
                 <div class="dropdown b-dropdown btn-group" id="__BVID__2011"><!---->
                     <div class="content-header-right text-md-right d-md-block d-none mb-1 col-md-3 col-12">
                         <a href="{{url('/logout')}}">
-                            <button type="button"  class="btn btn-icon btn-primary">
-                                <svg  width="14px" height="14px" viewBox="0 0 24 24"
-                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                      stroke-linejoin="round" class="feather feather-settings">
+                            <button type="button" class="btn btn-icon btn-primary">
+                                <svg width="14px" height="14px" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-settings">
                                     <circle cx="12" cy="12" r="3"></circle>
                                     <path
                                         d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -44,13 +45,11 @@
             </div>
 
         </div>
-
-
         <section data-v-36ff53bc="" class="invoice-add-wrapper"><!---->
             <div data-v-36ff53bc="" class="row invoice-add">
                 <div data-v-36ff53bc="" class="col-md-8 col-xl-9 col-12">
 
-                    <form data-v-36ff53bc="" class="" id="bukti-pemesanan">
+                    <form data-v-36ff53bc="" class="mt-0" id="bukti-pemesanan">
                         <div data-v-36ff53bc="" class="card invoice-preview-card"><!----><!---->
 
                             <div data-v-36ff53bc="" class="  card-body invoice-padding pb-0"><!----><!---->
@@ -67,7 +66,8 @@
                                         <div data-v-36ff53bc="" class="logo-wrapper">
                                             <h3 data-v-36ff53bc="" class="text-center invoice-logo"> SURAT
                                                 PEMESANAN PERPANJANGAN </h3>
-                                            <h5 data-v-36ff53bc="" class=" text-center invoice-logo"> HAK PEMAKAIAN TEMPAT USAHA</h5>
+                                            <h5 data-v-36ff53bc="" class=" text-center invoice-logo"> HAK PEMAKAIAN
+                                                TEMPAT USAHA</h5>
                                             <h5 data-v-36ff53bc="" class="text-center invoice-logo"> UPB
                                                 PASAR INDUK KRAMAT JATI </h5>
                                             <h5 data-v-36ff53bc="" class="text-center invoice-logo">
@@ -127,7 +127,7 @@
                                                         <input type="text"
                                                                class="right-input form-control invoice-edit-input flatpickr-input"
                                                                readonly class="form-control-plaintext" id="staticEmail"
-                                                               value="{{\Carbon\Carbon::now()->toDateString()}}">
+                                                               value="{{date('d-m-Y', strtotime(now()))}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,6 +165,13 @@
                                                     <td data-v-36ff53bc="" class="pr-1">:</td>
                                                     <td data-v-36ff53bc="">{{$this->payment_text}}</td>
                                                 </tr>
+
+                                                <tr data-v-36ff53bc="">
+                                                    <td data-v-36ff53bc="" class="pr-1"> Petugas:</td>
+                                                    <td data-v-36ff53bc="" class="pr-1">:</td>
+                                                    <td data-v-36ff53bc="">{{$user->name}}</td>
+                                                </tr>
+
                                                 {{--                                                <tr data-v-36ff53bc="">--}}
                                                 {{--                                                    <td data-v-36ff53bc="" class="pr-1"> Status DP:</td>--}}
                                                 {{--                                                    <td data-v-36ff53bc="" class="pr-1"> :</td>--}}
@@ -180,7 +187,7 @@
 
                             <div data-v-36ff53bc="" class="card-body invoice-padding form-item-section"><!----><!---->
                                 <div data-v-36ff53bc=""
-                                     class=" mt-md-0 mt-3  col-md-12">
+                                     class=" mt-md-0 mt-0 col-md-12">
                                     <label data-v-36ff53bc="" for="invoice-data-sales-person"
                                            class="text-nowrap mr-50">Terbilang :</label>
                                     <h4 class="text-center terbilang invoice-logo">{{$terbilang}}</h4>
@@ -215,14 +222,14 @@
                                             @endif
                                         @endforeach
 
-{{--                                        <label data-v-36ff53bc="" for="invoice-data-sales-person"--}}
-{{--                                               class="text-nowrap mr-50">Petugas:</label>--}}
-{{--                                        <input data-v-36ff53bc=""--}}
-{{--                                               readonly--}}
-{{--                                               id="invoice-data-sales-person"--}}
-{{--                                               type="text"--}}
-{{--                                               placeholder="{{($user->name)}}"--}}
-{{--                                               class="form-control">--}}
+                                        {{--                                        <label data-v-36ff53bc="" for="invoice-data-sales-person"--}}
+                                        {{--                                               class="text-nowrap mr-50">Petugas:</label>--}}
+                                        {{--                                        <input data-v-36ff53bc=""--}}
+                                        {{--                                               readonly--}}
+                                        {{--                                               id="invoice-data-sales-person"--}}
+                                        {{--                                               type="text"--}}
+                                        {{--                                               placeholder="{{($user->name)}}"--}}
+                                        {{--                                               class="form-control">--}}
                                     </div>
                                     <!-- Invoice bottom-right-->
                                     <div data-v-36ff53bc=""
@@ -241,6 +248,15 @@
                                                 <p data-v-36ff53bc=""
                                                    class="invoice-total-amount d-flex justify-content-end"> {{$discount_text}} </p>
                                             </div>
+
+                                            @if($discount_price)
+                                                <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
+                                                                                                      class="invoice-total-title">
+                                                        Discount price: </p>
+                                                    <p data-v-36ff53bc=""
+                                                       class="invoice-total-amount d-flex justify-content-end"> {{$discount_price}} </p>
+                                                </div>
+                                            @endif
 
                                             <hr data-v-36ff53bc="" class=invoice-spacing>
                                             <div data-v-36ff53bc="" class="invoice-total-item"><p data-v-36ff53bc=""
@@ -293,6 +309,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-1 card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="font-weight-bolder"> Tanda tangan Petugas</div>
+                                        <div> Tanggal: {{date('d-m-Y', strtotime(now()))}}</div>
+                                        <div class="text-center"
+                                             style="margin-top: 80px; text-transform: capitalize"> {{$user->name}}</div>
+                                        <hr data-v-36ff53bc="" class=" mt-0 invoice-spacing">
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="font-weight-bolder"> Tanda tangan pembeli</div>
+                                        <div> Tanggal: {{date('d-m-Y', strtotime(now()))}}</div>
+                                        <div class="text-center"
+                                             style="margin-top: 80px; text-transform: capitalize"> {{$name}}</div>
+                                        <hr data-v-36ff53bc="" class=" mt-0 invoice-spacing">
+                                    </div>
+                                </div>
+                            </div>
                             <hr data-v-36ff53bc="" class="invoice-spacing">
                             <div class="row">
                                 <div class="col-md-12" style="font-size: 12px">
@@ -317,8 +354,6 @@
                         </div>
                     </form>
                 </div>
-
-
                 <div data-v-36ff53bc="" class="invoice-actions col-md-4 col-xl-3 col-12">
                     <div data-v-36ff53bc="" class="card"><!----><!---->
                         <div data-v-36ff53bc="" class="card-body"><!----><!---->
@@ -397,19 +432,29 @@
                                     </div>
                                 </div>
 
-                                @if(blank($payments))
-                                    <div class="mb-75 ">
-                                        <label for="staticEmail" class="col-sm-8 col-form-label">Discount rate
-                                            ({{$discount_rate_text}})</label>
-                                        <div class="">
-                                            <input type="text"
-                                                   class="right-input form-control invoice-edit-input flatpickr-input"
-                                                   class="form-control-plaintext"
-                                                   placeholder="{{$inputs["discount_rate"] }}"
-                                                   wire:model="inputs.discount_rate">
-                                        </div>
+
+                                <div class="mb-75 ">
+                                    <label for="staticEmail" class="col-sm-8 col-form-label">Discount rate
+                                        ({{$discount_rate_text}})</label>
+                                    <div class="">
+                                        <input type="text"
+                                               class="right-input form-control invoice-edit-input flatpickr-input"
+                                               class="form-control-plaintext"
+                                               placeholder="{{$inputs["discount_rate"] }}"
+                                               wire:model="inputs.discount_rate">
                                     </div>
-                                @endif
+                                </div>
+
+                                <div class="mb-75 ">
+                                    <label for="staticEmail" class="col-sm-8 col-form-label">Discount Price</label>
+                                    <div class="">
+                                        <input type="text"
+                                               class="right-input form-control invoice-edit-input flatpickr-input"
+                                               class="form-control-plaintext"
+                                               placeholder="{{optional($inputs)["discount_price"] }}"
+                                               wire:model="inputs.discount_price">
+                                    </div>
+                                </div>
 
                                 <div class="mb-75 ">
                                     <label for="staticEmail" class="col-sm-8 col-form-label">Pembayaran</label>
@@ -430,19 +475,19 @@
                                         style="overflow-anchor: none;"> Print pemesanan
                                 </button>
 
-                                <button onclick="printKwitansi()" data-v-36ff53bc="" type="button"
-                                        class="btn mb-75 btn-primary btn-block collapsed"
-                                        aria-expanded="false" aria-controls="sidebar-send-invoice"
-                                        style="overflow-anchor: none;"> Print kwitansi
-                                </button>
-                                @endif
+                                <a href="#modal-kwitansi" data-v-36ff53bc="" type="button"
+                                   class="btn mb-75 btn-primary btn-block collapsed"
+                                   aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                   style="overflow-anchor: none;"> Print kwitansi
+                                </a>
+                            @endif
 
-                                <button wire:click="save" data-v-36ff53bc=""
-                                        type="button"
-                                        class="btn mb-75 btn-primary btn-block collapsed"
-                                        aria-expanded="false" aria-controls="sidebar-send-invoice"
-                                        style="overflow-anchor: none;"> Save
-                                </button>
+                            <button wire:click="save" data-v-36ff53bc=""
+                                    type="button"
+                                    class="btn mb-75 btn-primary btn-block collapsed"
+                                    aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                    style="overflow-anchor: none;"> Save
+                            </button>
 
 
                         </div><!----><!----></div>
@@ -450,64 +495,19 @@
             </div>
         </section>
 
-
     </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
     <div class="kwitansi AK landscape" id="kwitansi" style="
 {{--            --}}{{--background-image:url('{{ asset('logo/kwitansi.jpeg') }}');--}}
 {{--            background-repeat: no-repeat;--}}
 {{--            background-size: contain;--}}
         ">
-        {{--        <table style="width: 290mm; height: 148mm;">--}}
-        {{--            <tr style="height: 104px">--}}
-        {{--                <td colspan="6"></td>--}}
-        {{--                <td colspan="2">1</td>--}}
-
-        {{--            </tr>--}}
-        {{--            <tr style="height: 42px">--}}
-        {{--                <td colspan="3"></td>--}}
-        {{--                <td>1</td>--}}
-        {{--                <td></td>--}}
-        {{--                <td>1</td>--}}
-        {{--                <td></td>--}}
-        {{--                <td>1</td>--}}
-
-        {{--            </tr>--}}
-        {{--            <tr style="height: 36px">--}}
-        {{--                <td colspan="2"></td>--}}
-        {{--                <td colspan="6">{{$name}}</td>--}}
-
-        {{--            </tr>--}}
-        {{--            <tr style="height: 72px">--}}
-        {{--                <td colspan="2"></td>--}}
-        {{--                <td colspan="6" style="padding-bottom: 5px" >--}}
-        {{--                    {{$terbilang}}--}}
-        {{--                </td>--}}
-        {{--            </tr>--}}
-        {{--            <tr style="height: 88px">--}}
-        {{--                <td colspan="2"></td>--}}
-        {{--                <td colspan="6" style="vertical-align: baseline; padding-top: 9px; line-height: 27px">{{$kiosNo}}</td>--}}
-        {{--            </tr>--}}
-        {{--            <tr style="height: 44px">--}}
-        {{--                <td></td>--}}
-        {{--                <td colspan="3" style="padding-bottom: 5px">{{$lastPayment}}</td>--}}
-        {{--                <td colspan="5" style="padding-bottom: 16px">Jakarta {{\Illuminate\Support\Carbon::now()->toDateString()}}</td>--}}
-        {{--            </tr>--}}
-        {{--            <tr style="height: 85px">--}}
-        {{--                <td colspan="5"></td>--}}
-        {{--                <td colspan="3"> {{$user->name}}</td>--}}
-        {{--            </tr>--}}
-        {{--            <tr>--}}
-
-        {{--                <td style="width:68px"></td>--}}
-        {{--                <td style="width:125px"></td>--}}
-        {{--                <td style="width:234px"></td>--}}
-        {{--                <td style="width:99px"></td>--}}
-        {{--                <td style="width:20px"></td>--}}
-        {{--                <td style="width:20px"></td>--}}
-        {{--                <td></td>--}}
-        {{--                <td style="width: 159px"></td>--}}
-        {{--            </tr>--}}
-        {{--        </table>--}}
         <div class="kwitansi-content">
             <div class="row kwitansi-head">
                 <div class="col-md-2">
@@ -530,7 +530,11 @@
                             Nomer Kwitansi <span class="" style="float: right"> :</span>
                         </div>
                         <div class="col-md-7">
-                            {{optional($lastPayment)->id}}
+                            @if(!blank($payment_selected))
+                            {{optional($payment_selected)['id']}}
+                            @else
+                                -
+                            @endif
                             <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
                         </div>
                     </div>
@@ -539,7 +543,11 @@
                             Bank <span class="" style="float: right"> :</span>
                         </div>
                         <div class="col-md-7" style="text-transform: uppercase">
-                            {{optional(optional($lastPayment)->paymentProvider)->name}}
+                            @if(!blank($payment_selected))
+                                {{optional(optional($payment_selected)['paymentProvider'])['name']}}
+                            @else
+                                -
+                            @endif
                             <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
                         </div>
                     </div>
@@ -562,11 +570,14 @@
                             Sejumlah Uang <span class="" style="float: right"> :</span>
                         </div>
                         <div class="col-md-9" style="text-transform: capitalize">
-                            {{$terbilang}}
+                            @if(!blank($payment_selected))
+                                {{$this->getTerbilang(optional($payment_selected)['amount'])}}
+                            @else
+                                 -
+                            @endif
                             <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
                         </div>
                     </div>
-                    <div>
                         <div class="row">
                             <div class="col-md-3">
                                 Untuk Pembayaran <span class="" style="float: right"> :</span>
@@ -577,40 +588,55 @@
                                 <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
                             </div>
                         </div>
-                    </div>
+                    <div class="row">
+                            <div class="col-md-3">
+                                Catatan <span class="" style="float: right"> :</span>
+                            </div>
+                            <div class="col-md-9">
+                                @if(!blank(optional($payment_selected)['note']))
+                                    {{optional($payment_selected)['note']}}
+                                @else
+                                    -
+                                @endif
+                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
+                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">
+                            </div>
+                        </div>
                     <div>
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                Status DP <span class="" style="float: right"> :</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9 mb-2">--}}
-{{--                                {{$dp_status ? 'Lunas' : ' Belum lunas'}}--}}
-{{--                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="row">--}}
+                        {{--                            <div class="col-md-3">--}}
+                        {{--                                Status DP <span class="" style="float: right"> :</span>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="col-md-9 mb-2">--}}
+                        {{--                                {{$dp_status ? 'Lunas' : ' Belum lunas'}}--}}
+                        {{--                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                Sisa pembayaran <span class="" style="float: right"> :</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9 mb-2">--}}
-{{--                                {{$left_payment_text}}--}}
-{{--                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="row">--}}
+                        {{--                            <div class="col-md-3">--}}
+                        {{--                                Sisa pembayaran <span class="" style="float: right"> :</span>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="col-md-9 mb-2">--}}
+                        {{--                                {{$left_payment_text}}--}}
+                        {{--                                <hr data-v-36ff53bc="" class="kwitansi-spacing" style="margin:auto;width: 100%">--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     </div>
                 </div>
             </div>
             <div class="row kwitansi-footer" style="margin-top: 40px">
                 <div class="col-md-6">
                     <div class="kwitansi-footer-rp text-center" style="font-size: 24px">
-                        {{$lastPaymentAmountText}}
+                        @if(!blank($payment_selected))
+                            Rp. {{number_format($payment_selected['amount'], 2, ',', '.')}}
+                        @endif
                     </div>
 
                 </div>
                 <div class="col-md-6">
                     <div style="text-align: center">
-                        Jakarta, {{\Illuminate\Support\Carbon::now()->toDateString()}}</div>
+                        Jakarta, {{$kwitansi_date}}</div>
                     {{--                <hr data-v-36ff53bc="" class="kwitansi-spacing">--}}
                     <div
                         style="font-weight:bolder;text-align: center; margin-top:100px; text-transform: capitalize"> {{$user->name}}</div>
@@ -619,10 +645,67 @@
             </div>
         </div>
     </div>
+
+
+    <div id="modal-kwitansi" class="modal">
+        <div class="modal__content">
+            <div>
+            </div>
+            <h4>Print Kwitansi</h4>
+            <hr data-v-36ff53bc="" class="kwitansi-spacing">
+            <div class="row">
+
+
+{{--                <div class="mb-75">--}}
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Date dd-mm-yyyy</label>
+                    <div class="col-sm-8">
+                        <input type="text"
+                               class="right-input form-control invoice-edit-input flatpickr-input"
+                               class="form-control-plaintext"
+                               placeholder="{{$kwitansi_date}}" wire:model="kwitansi_date">
+                    </div>
+
+                <label for="staticEmail" class="mt-75 col-sm-4 col-form-label">Verifikasi pembayaran</label>
+                <div class="mt-75 col-sm-8">
+                    <select wire:model="verify_payment" class="custom-select">
+                        <option value="0">Belum verify</option>
+                        <option  value="1">Sudah verify</option>
+                    </select>
+                </div>
+                <label for="staticEmail" class="mt-75 col-sm-4 col-form-label">Periode pembayaran</label>
+                <div class="mt-75 col-sm-8">
+                    <select wire:model="payment_selected_id" class="custom-select">
+                        <option disabled="disabled" value="" selected>--- Pilih periode pembayaran---</option>
+                        @foreach ($payments as $paymentList)
+                            <option value="{{$paymentList->id}}"> Rp. {{number_format($paymentList->amount, 2, ',', '.')}}, tgl {{date('d-m-Y', strtotime(now()))}} </option>
+                        @endforeach
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="mt-75 modal__footer">
+                <a href="#" wire:click="saveKwitansi" onclick="printKwitansi()" data-v-36ff53bc="" type="button"
+                        class="btn mb-75 btn-primary btn-block collapsed"
+                        aria-expanded="false" aria-controls="sidebar-send-invoice"
+                        style="overflow-anchor: none;"> Print
+                </a>
+                <a href="#" data-v-36ff53bc="" type="button"
+                        class="btn mb-75 btn-primary btn-block collapsed"
+                        aria-expanded="false" aria-controls="sidebar-send-invoice"
+                        style="overflow-anchor: none;"> Cancel
+                </a>
+{{--                Made with <i class="fa fa-heart"></i>, by <a href="https://twitter.com/denicmarko" target="_blank">@denicmarko</a>--}}
+            </div>
+
+            <a href="#" class="modal__close">&times;</a>
+        </div>
+    </div>
 </div>
 </div>
 </div>
 <script>
+
     function printBuktiPemesanan() {
         document.getElementById('bukti-pemesanan').id = 'printarea'
         document.getElementById('kwitansi').style.display = 'none'
@@ -638,53 +721,20 @@
         document.getElementById('printarea').id = 'kwitansi'
         document.getElementById('pemesanan').style.display = 'block'
         document.getElementById('kwitansi').style.display = 'none'
-    }
 
-    // function printKwitansi() {
-    //     var gAutoPrint = false;
-    //
-    //     document.getElementById('kwitansi').style.display = 'block'
-    //     document.getElementById('kwitansi').id = 'printarea'
-    //     if (document.getElementById != null) {
-    //         var html = '<HTML>\n<HEAD>\n';
-    //         if (document.getElementsByTagName != null) {
-    //             var headTags = document.getElementsByTagName("head");
-    //             if (headTags.length > 0) html += headTags[0].innerHTML;
-    //         }
-    //
-    //         html += '\n</HE' + 'AD>\n<BODY>\n';
-    //         var printReadyElem = document.getElementById("printarea");
-    //
-    //         if (printReadyElem != null) html += printReadyElem.innerHTML;
-    //         else {
-    //             alert("Error, no contents.");
-    //             return;
-    //         }
-    //
-    //         html += '\n</BODY>\n</HTML>';
-    //         var printWin = window.open("", "processPrint");
-    //         printWin.document.open();
-    //         printWin.document.write(html);
-    //         printWin.document.close();
-    //
-    //         if (gAutoPrint) printWin.print();
-    //     } else {
-    //         alert("Browser not supported.")
-    //     }
-    //     ;
-    //     document.getElementById('printarea').id = 'kwitansi'
-    //     document.getElementById('kwitansi').style.display = 'none'
-    // }
+
+    }
 </script>
 <style>
     body {
         /*letter-spacing: 1px;*/
-        font-family: "Times New Roman",Montserrat, Helvetica, Arial, serif;
+        font-family: "Times New Roman", Montserrat, Helvetica, Arial, serif;
     }
 
-    h5, h4, h3, h6, label, p,td{
+    h5, h4, h3, h6, label, p, td {
         color: black;
     }
+
     l {
         list-style: none;
         counter-reset: my-awesome-counter;
@@ -706,6 +756,7 @@
         visibility: hidden;
         display: none;
     }
+
 
     .kwitansi-content {
 
@@ -897,22 +948,11 @@
     }
 
     @media print {
-        div {
-            break-inside: avoid;
-        }
-
         * {
+            break-inside: avoid;
             -webkit-print-color-adjust: exact !important; /* Chrome, Safari 6 – 15.3, Edge */
             color-adjust: exact !important; /* Firefox 48 – 96 */
             print-color-adjust: exact !important; /* Firefox 97+, Safari 15.4+ */
-        }
-
-        .body {
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-            box-sizing: border-box;
-            page-break-after: always;
         }
 
 
@@ -942,12 +982,13 @@
             overflow: hidden;
         }
 
-        .note {
+        .note, .content-header, .alertify-notifier {
             display: none;
         }
 
         #printarea {
-            height: 100%;
+            height: auto;
+
             left: 0;
             top: 0;
 
@@ -964,15 +1005,7 @@
         /*.invoice-top-left{*/
         /*    width: 50%;*/
         /*}*/
-        .invoice-spacing {
-            border-width: 2px !important;
-            border-style: solid !important;
-            font-size: 10px !important;
-            background-color: red;
-            -webkit-print-color-adjust: exact;
-        }
-
-        .note {
+        .note, #pemesanan {
             visibility: hidden;
         }
 

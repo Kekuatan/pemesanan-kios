@@ -15,13 +15,14 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->date('kwitansi_date')->nullable();
             $table->foreignId('product_id')->default(null)->nullable()->constrained('products');
-            $table->date('payment_date');
+            $table->date('payment_date')->nullable();
             $table->boolean('verify')->default(0);
             $table->text('note')->nullable();
             $table->foreignUUId('user_id')->default(null)->nullable()->constrained('users');
             $table->unsignedBigInteger('amount');
-
+            $table->string('transaction_id')->nullable();
             $table->foreignId('payment_provider_id')->default(null)->nullable()->constrained('payment_providers');
             $table->timestamps();
             $table->softDeletes();
