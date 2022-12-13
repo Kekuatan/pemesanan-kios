@@ -75,6 +75,7 @@ class DetailProduct extends Component
     public $briva;
     public $verify_payment;
     public $kwitansi_date;
+    public $transaction_id;
 
     public $inputs;
 
@@ -94,6 +95,7 @@ class DetailProduct extends Component
     {
         $this->payment_selected = collect($this->payments)->where('id', '==', $this->payment_selected_id)->first();
         $this->verify_payment = $this->payment_selected->verify;
+        $this->transaction_id = $this->payment_selected->transaction_id;
         $this->kwitansi_date = date('d-m-Y', strtotime($this->payment_selected->kwitansi_date));
     }
 
@@ -257,10 +259,17 @@ class DetailProduct extends Component
             Payment::where('id', $this->payment_selected_id)->update([
                 'kwitansi_date' => (new Carbon($this->kwitansi_date))->format('Y-m-d'),
                 'verify' => $this->verify_payment,
+                'transaction_id' => $this->transaction_id
             ]);
 
+            if( $this->product->total_price !== $this->total_price){
+                $this->product->update(["total_price" => $this->total_price]);
+            }
+
+            $this->alertifyError('success', 'Success');
             DB::commit();
         } catch (\Exception $exception) {
+            $this->alertifyError('error', 'Database error');
             DB::rollBack();
         }
     }
@@ -303,6 +312,7 @@ class DetailProduct extends Component
             $this->payment_selected = (collect($this->payments)->last());
             $this->verify_payment = $this->payment_selected['verify'];
             $this->payment_selected_id = (collect($this->payments)->last())['id'];
+            $this->transaction_id = (collect($this->payments)->last())['transaction_id'];
             $this->kwitansi_date = date('d-m-Y', strtotime($this->payment_selected['kwitansi_date']));
             $this->lastPaymentAmount = $this->lastPayment['amount'];
             $this->lastPaymentAmountText = 'Rp. ' . number_format($this->lastPaymentAmount, 2, ',', '.');

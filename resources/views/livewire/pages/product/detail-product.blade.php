@@ -212,7 +212,7 @@
                                          class="mt-md-0  col-md-9">
                                         @foreach($payments as $paymentItem)
                                             <p> Pembayaran pada tanggal
-                                                : {{\Illuminate\Support\Carbon::parseFromLocale($paymentItem->created_at)->toDateString()}}
+                                                : {{\Illuminate\Support\Carbon::parseFromLocale($paymentItem->kwitansi_date)->toDateString()}}
                                                 Sejumlah {{'Rp. ' . number_format($paymentItem->amount, 2, ',', '.')}}
                                                 Petugas : ( {{$paymentItem->user->name}} )
                                                 @if(blank($paymentItem->note))
@@ -316,7 +316,7 @@
                                         <div> Tanggal: {{date('d-m-Y', strtotime(now()))}}</div>
                                         <div class="text-center"
                                              style="margin-top: 80px; text-transform: capitalize"> {{$user->name}}</div>
-                                        <hr data-v-36ff53bc="" class=" mt-0 invoice-spacing">
+                                        <hr data-v-36ff53bc="" class=" mt-25 invoice-spacing">
                                     </div>
                                     <div class="col-md-6">
 
@@ -326,7 +326,7 @@
                                         <div> Tanggal: {{date('d-m-Y', strtotime(now()))}}</div>
                                         <div class="text-center"
                                              style="margin-top: 80px; text-transform: capitalize"> {{$name}}</div>
-                                        <hr data-v-36ff53bc="" class=" mt-0 invoice-spacing">
+                                        <hr data-v-36ff53bc="" class=" mt-25 invoice-spacing">
                                     </div>
                                 </div>
                             </div>
@@ -665,6 +665,14 @@
                                placeholder="{{$kwitansi_date}}" wire:model="kwitansi_date">
                     </div>
 
+                <label for="staticEmail" class="col-sm-4 col-form-label">Date dd-mm-yyyy</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           class="right-input form-control invoice-edit-input flatpickr-input"
+                           class="form-control-plaintext"
+                           placeholder="{{$transaction_id}}" wire:model="transaction_id">
+                </div>
+
                 <label for="staticEmail" class="mt-75 col-sm-4 col-form-label">Verifikasi pembayaran</label>
                 <div class="mt-75 col-sm-8">
                     <select wire:model="verify_payment" class="custom-select">
@@ -685,16 +693,32 @@
             </div>
 
             <div class="mt-75 modal__footer">
-                <a href="#" wire:click="saveKwitansi" onclick="printKwitansi()" data-v-36ff53bc="" type="button"
-                        class="btn mb-75 btn-primary btn-block collapsed"
-                        aria-expanded="false" aria-controls="sidebar-send-invoice"
-                        style="overflow-anchor: none;"> Print
-                </a>
-                <a href="#" data-v-36ff53bc="" type="button"
-                        class="btn mb-75 btn-primary btn-block collapsed"
-                        aria-expanded="false" aria-controls="sidebar-send-invoice"
-                        style="overflow-anchor: none;"> Cancel
-                </a>
+                <div class="row mt-5">
+                    <div class="col-md-4">
+                        <a href="#" wire:click="saveKwitansi" onclick="printKwitansi()" data-v-36ff53bc="" type="button"
+                           class="btn mb-75 btn-primary btn-block collapsed"
+                           aria-expanded="false" aria-controls="sidebar-send-invoice"
+                           style="overflow-anchor: none;"> Save & Print
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <button href="" wire:click="saveKwitansi" data-v-36ff53bc="" type="button"
+                                class="btn mb-75 btn-info btn-block collapsed"
+                                aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                style="overflow-anchor: none;"> Save
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#" data-v-36ff53bc="" type="button"
+                           class="btn mb-75 btn-danger btn-block collapsed"
+                           aria-expanded="false" aria-controls="sidebar-send-invoice"
+                           style="overflow-anchor: none;"> Cancel
+                        </a>
+                    </div>
+                </div>
+
+
+
 {{--                Made with <i class="fa fa-heart"></i>, by <a href="https://twitter.com/denicmarko" target="_blank">@denicmarko</a>--}}
             </div>
 

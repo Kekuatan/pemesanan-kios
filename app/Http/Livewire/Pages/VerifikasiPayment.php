@@ -29,7 +29,9 @@ class VerifikasiPayment extends Component
     {
         $pageSize = 10;
         $products = Product::with('payments')
-            ->whereHas('payments')
+            ->whereHas('payments' ,function($query){
+                return $query->where('verify', 0);
+            })
             ->withCount([
                 'payments as sum_amount' => function ($query) {
                     $query->select(DB::raw("sum(amount)"));
