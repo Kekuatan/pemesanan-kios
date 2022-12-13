@@ -29,6 +29,7 @@ class DetailProduct extends Component
     public $address;
     public $price;
     public $dp;
+    public $area;
 
     public $price_text;
     public $ppn_text;
@@ -240,16 +241,28 @@ class DetailProduct extends Component
                 $payload['briva'] = $this->briva;
             }
 
+            if ($this->area !== $this->product->tu_area) {
+                $priceList = PriceList::where('area', $this->area)->with('paymentMethod')->get();
+                if(blank($priceList)){
+                    DB::rollBack();
+                    $this->alertifyError('error', 'Area tidak terdaftar');
+                    return;
+                }
+                $payload['tu_area'] = $this->area;
+            }
+
+
             $this->product->update($payload);
             $this->showPrint = true;
             $this->alertifyError('success', 'Success');
-            self::mountData();
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
             $this->alertifyError('error', 'Database error');
             dd($exception->getMessage());
         }
+
+        self::mountData();
     }
 
     public function saveKwitansi()
@@ -345,7 +358,16 @@ class DetailProduct extends Component
     private function watchInputData()
     {
         $this->price_list_id = $this->inputs['price_list_id'];
-        $this->price_list = collect($this->priceLists)->where('id', '==', $this->inputs['price_list_id'])->first()->toArray();
+        $findPriceList = collect($this->priceLists)->where('id', '==', $this->inputs['price_list_id'])->first();
+
+        if(blank($findPriceList)){
+            $a = PriceList::where('id',  $this->price_list_id)->first();
+            $this->price_list = collect($this->priceLists)->where('payment_method_id', '==',$a->payment_method_id)->first()->toArray();
+            $this->price_list_id = $this->price_list['id'];
+            $this->inputs['price_list_id'] = $this->price_list_id;
+        } else {
+            $this->price_list = $findPriceList->toArray();
+        }
 
         $this->price = floor(PriceListEnum::FIX_PRICE * $this->price_list['area']);
         $this->price_text = 'Rp. ' . number_format($this->price, 2, ',', '.');
@@ -361,6 +383,7 @@ class DetailProduct extends Component
         $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
         $this->discount_text = 'Rp. ' . number_format($this->discount, 2, ',', '.');
 
+        $this->area = $this->product->tu_area;
 
         $this->ppn_rate = PriceListEnum::PPN;
         $this->ppn_rate_text = ($this->ppn_rate * 100) . '%';

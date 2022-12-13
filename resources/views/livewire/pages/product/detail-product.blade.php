@@ -393,6 +393,15 @@
                                     </div>
                                 </div>
                                 <div class="mb-75 ">
+                                    <label for="staticEmail" class="col-sm-8 col-form-label">Area</label>
+                                    <div class="">
+                                        <input type="text"
+                                               class="right-input form-control invoice-edit-input flatpickr-input"
+                                               class="form-control-plaintext"
+                                               placeholder="{{$area}}" wire:model="area">
+                                    </div>
+                                </div>
+                                <div class="mb-75 ">
                                     <label for="staticEmail" class="col-sm-8 col-form-label">Nama</label>
                                     <div class="">
                                         <input type="text"
