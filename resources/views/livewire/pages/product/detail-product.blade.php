@@ -1015,7 +1015,10 @@
             overflow: hidden;
         }
 
-        .note, .content-header, .alertify-notifier {
+        .modal{
+            background: none;
+        }
+        .note, .content-header, .alertify-notifier .modal {
             display: none;
         }
 
