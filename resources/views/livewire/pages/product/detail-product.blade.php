@@ -93,7 +93,7 @@
                                             To: </h6>
                                         <div data-v-36ff53bc="" class=" mt-1">
                                             <p data-v-36ff53bc="" class="card-text mb-25">
-                                                {{$name . (blank($inputs['name']) ? "" : ' | '.$inputs['name'])}}</p>
+                                                {{(blank($inputs['name']) ? $name : $inputs['name'])}}</p>
                                             <p data-v-36ff53bc="" class="card-text mb-25">
                                                 {{(blank($inputs['ktpNo']) ? $ktpNo : $inputs['ktpNo'])}}
                                             </p>

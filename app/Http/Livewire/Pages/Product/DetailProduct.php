@@ -228,10 +228,10 @@ class DetailProduct extends Component
 
             $payload = [
                 'price_list_id' => $this->inputs['price_list_id'],
-                "siho_name" => blank($this->inputs['name']) ? $this->product->siho_name : $this->product->siho_name . " | " . $this->inputs['name'],
-                "siho_ktp_no" => $this->ktpNo,
-                "siho_tlp" => $this->phoneNumber,
-                "siho_address" => $this->address,
+                "siho_name" => blank($this->inputs['name']) ? $this->product->siho_name :  $this->inputs['ktpNo'],
+                "siho_ktp_no" => blank($this->inputs['ktpNo']) ? $this->ktpNo : $this->inputs['ktpNo'],
+                "siho_tlp" => blank($this->inputs['phoneNumber']) ? $this->phoneNumber : $this->inputs['phoneNumber'],
+                "siho_address" => blank($this->inputs['address']) ? $this->phoneNumber : $this->inputs['address'],
                 "discount_rate" => $this->inputs['discount_rate'] / 100 == $this->price_list ['payment_method']['discount_rate']? null : $this->inputs['discount_rate'] / 100,
                 "status" => $this->left_payment <= 0 ? 1 : 0,
                 "total_price" => $this->total_price
