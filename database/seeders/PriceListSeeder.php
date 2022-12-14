@@ -22,10 +22,10 @@ class PriceListSeeder extends Seeder
             foreach (PriceListEnum::AREAS as $area) {
                 $price = floor(PriceListEnum::FIX_PRICE * $area);
                 $ppn = floor($price * PriceListEnum::PPN);
-                $priceWithPPN = floor($price +$ppn);
-                $bookingFee =  PriceListEnum::BOOKING_FEE;
+                $priceWithPPN = floor($price + $ppn);
+                $bookingFee = PriceListEnum::BOOKING_FEE;
                 $discount = floor($priceWithPPN * $paymentMethod->discount_rate);
-                $price = $priceWithPPN- $bookingFee -$discount;
+                $price = $priceWithPPN - $bookingFee - $discount;
 
                 $dp = floor($price * $paymentMethod->dp_rate);
 
@@ -40,7 +40,10 @@ class PriceListSeeder extends Seeder
                         'price' => $price,
                         'payment_method_id' => $paymentMethod->id,
                     ];
-                PriceList::create($data);
+                $priceList = PriceList::where('area', $area)->where('payment_method_id', $paymentMethod->id)->first();
+                if (blank($priceList)) {
+                    PriceList::create($data);
+                }
             }
         }
 

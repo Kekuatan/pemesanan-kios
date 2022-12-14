@@ -674,7 +674,7 @@
                                placeholder="{{$kwitansi_date}}" wire:model="kwitansi_date">
                     </div>
 
-                <label for="staticEmail" class="col-sm-4 col-form-label">Date dd-mm-yyyy</label>
+                <label for="staticEmail" class="col-sm-4 col-form-label">Transaksi Id</label>
                 <div class="col-sm-8">
                     <input type="text"
                            class="right-input form-control invoice-edit-input flatpickr-input"
@@ -694,7 +694,7 @@
                     <select wire:model="payment_selected_id" class="custom-select">
                         <option disabled="disabled" value="" selected>--- Pilih periode pembayaran---</option>
                         @foreach ($payments as $paymentList)
-                            <option value="{{$paymentList->id}}"> Rp. {{number_format($paymentList->amount, 2, ',', '.')}}, tgl {{date('d-m-Y', strtotime(now()))}} </option>
+                            <option value="{{$paymentList->id}}"> Rp. {{number_format($paymentList->amount, 2, ',', '.')}}, tgl {{date('d-m-Y', strtotime($paymentList->kwitansi_date))}}  {{$paymentList->status ? 'verify' : 'not verify'}}</option>
                         @endforeach
                     </select>
                 </div>
