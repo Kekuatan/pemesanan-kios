@@ -151,6 +151,7 @@ class DetailProduct extends Component
         if (blank($this->inputs['discount_rate'])) {
             $updateDiscountRate = $this->discount_rate !== $this->inputs["discount_rate"];
         } else {
+            $this->inputs["discount_rate"] = preg_replace("/[^0-9]/", "", $this->inputs["discount_rate"]);
             $updateDiscountRate = $this->discount_rate !== $this->inputs["discount_rate"] / 100;
         }
 
@@ -165,7 +166,7 @@ class DetailProduct extends Component
                     $this->discount_rate_text = '0%';
                     $this->discount = 0 + $this->discount_price;
                 } else {
-                    $this->discount = floor($this->price * ($this->inputs["discount_rate"] / 100)) + $this->discount_price;
+                    $this->discount = ceil($this->price * ($this->inputs["discount_rate"] / 100)) + $this->discount_price;
                     $this->discount_rate = ($this->inputs["discount_rate"]) / 100;
                     $this->discount_rate_text = ($this->inputs["discount_rate"]) . '%';
                 }
@@ -178,25 +179,25 @@ class DetailProduct extends Component
                     $this->inputs["discount_price"] = null;
                     $this->discount_price = null;
                     $this->discount_price_text = 'Rp.0,00';
-                    $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
+                    $this->discount = ceil($this->price * ($this->discount_rate)) + $this->discount_price;
                 } else {
                     $this->discount_price = $this->inputs["discount_price"];
-                    $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
+                    $this->discount = ceil($this->price * ($this->discount_rate)) + $this->discount_price;
                     $this->discount_price_text = 'Rp. ' . number_format($this->discount_price, 2, ',', '.');
 
                 }
             }
 
 
-            $this->price_with_discount = floor(($this->price - $this->discount));
+            $this->price_with_discount = ceil(($this->price - $this->discount));
             $this->price_with_discount_text = 'Rp. ' . number_format($this->price_with_discount, 2, ',', '.');
 
             $this->discount_text = 'Rp. ' . number_format($this->discount, 2, ',', '.');
 
-            $this->total_price = floor($this->price_with_discount + $this->ppn);
+            $this->total_price = ceil($this->price_with_discount + $this->ppn);
             $this->total_price_text = 'Rp. ' . number_format($this->total_price, 2, ',', '.');
 
-            $this->dp = floor($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+            $this->dp = ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
             $this->dp_text = 'Rp. ' . number_format($this->dp, 2, ',', '.');
             $this->dp_status = ($this->sum_payment + $this->payment) >= $this->dp ? 1 : 0;
 
@@ -361,26 +362,26 @@ class DetailProduct extends Component
         $findPriceList = collect($this->priceLists)->where('id', '==', $this->inputs['price_list_id'])->first();
 
         if(blank($findPriceList)){
-            $a = PriceList::where('id',  $this->price_list_id)->first();
-            $this->price_list = collect($this->priceLists)->where('payment_method_id', '==',$a->payment_method_id)->first()->toArray();
+            $priceList = PriceList::where('id',  $this->price_list_id)->first();
+            $this->price_list = collect($this->priceLists)->where('payment_method_id', '==',$priceList->payment_method_id)->first()->toArray();
             $this->price_list_id = $this->price_list['id'];
             $this->inputs['price_list_id'] = $this->price_list_id;
         } else {
             $this->price_list = $findPriceList->toArray();
         }
 
-        $this->price = floor(PriceListEnum::FIX_PRICE * $this->price_list['area']);
+        $this->price = ceil(PriceListEnum::FIX_PRICE * $this->price_list['area']);
         $this->price_text = 'Rp. ' . number_format($this->price, 2, ',', '.');
 
         $this->discount_rate = ($this->product->discount_rate) ?? $this->price_list ['payment_method']['discount_rate'];
-        $this->inputs['discount_rate'] = floor($this->discount_rate * 100);
+        $this->inputs['discount_rate'] = ceil($this->discount_rate * 100);
         $this->discount_rate_text = ($this->discount_rate * 100) . '%';
 
         $this->discount_price = $this->product->discount_price;
         $this->discount_price_text = 'Rp. ' . number_format($this->discount_price, 2, ',', '.');
 
 
-        $this->discount = floor($this->price * ($this->discount_rate)) + $this->discount_price;
+        $this->discount = ceil($this->price * ($this->discount_rate)) + $this->discount_price;
         $this->discount_text = 'Rp. ' . number_format($this->discount, 2, ',', '.');
 
         $this->area = $this->product->tu_area;
@@ -388,21 +389,21 @@ class DetailProduct extends Component
         $this->ppn_rate = PriceListEnum::PPN;
         $this->ppn_rate_text = ($this->ppn_rate * 100) . '%';
 
-        $this->ppn = floor(floor($this->price - $this->discount) * PriceListEnum::PPN);
+        $this->ppn = ceil(ceil($this->price - $this->discount) * PriceListEnum::PPN);
         $this->ppn_text = 'Rp. ' . number_format($this->ppn, 2, ',', '.');
 
-        $this->price_with_discount = floor(($this->price - $this->discount));
+        $this->price_with_discount = ceil(($this->price - $this->discount));
         $this->price_with_discount_text = 'Rp. ' . number_format($this->price_with_discount, 2, ',', '.');
 
 
         $this->dp_percent = PriceListEnum::DP;
         $this->dp_percent_text = ((PriceListEnum::DP * 100) . '%');
 
-        $this->total_price = floor($this->price_with_discount + $this->ppn);
+        $this->total_price = ceil($this->price_with_discount + $this->ppn);
         $this->total_price_text = 'Rp. ' . number_format($this->total_price, 2, ',', '.');
 
-        $this->inputs["dp"] = $this->inputs['dp'] ?? floor($this->total_price * $this->price_list ['payment_method']['dp_rate']);
-        $this->dp = floor($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+        $this->inputs["dp"] = $this->inputs['dp'] ?? ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+        $this->dp = ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
         $this->dp_text = 'Rp. ' . number_format($this->inputs["dp"], 2, ',', '.');
 
         $this->inputs['payment'] = null;

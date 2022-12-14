@@ -80,7 +80,7 @@
                             <td aria-colindex="4" role="cell" class="">
                                 <div class="progress" style="height: 7px;">
                                     <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
-                                         class="progress-bar {{$payment->verify? "bg-success" : "bg-danger"}} progress-bar-striped" style="width: {{blank($product->total_price) ?0 : floor(($product->sum_amount/$product->total_price )*100)}}%;"></div>
+                                         class="progress-bar {{$payment->verify? "bg-success" : "bg-danger"}} progress-bar-striped" style="width: {{blank($product->total_price) ?0 : ceil(($product->sum_amount/$product->total_price )*100)}}%;"></div>
                                 </div>
                             </td>
                             <td aria-colindex="5" role="cell" class="">

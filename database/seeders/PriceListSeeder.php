@@ -20,14 +20,14 @@ class PriceListSeeder extends Seeder
 
         foreach ($paymentMethods as $paymentMethod) {
             foreach (PriceListEnum::AREAS as $area) {
-                $price = floor(PriceListEnum::FIX_PRICE * $area);
-                $ppn = floor($price * PriceListEnum::PPN);
-                $priceWithPPN = floor($price + $ppn);
+                $price = ceil(PriceListEnum::FIX_PRICE * $area);
+                $ppn = ceil($price * PriceListEnum::PPN);
+                $priceWithPPN = ceil($price + $ppn);
                 $bookingFee = PriceListEnum::BOOKING_FEE;
-                $discount = floor($priceWithPPN * $paymentMethod->discount_rate);
+                $discount = ceil($priceWithPPN * $paymentMethod->discount_rate);
                 $price = $priceWithPPN - $bookingFee - $discount;
 
-                $dp = floor($price * $paymentMethod->dp_rate);
+                $dp = ceil($price * $paymentMethod->dp_rate);
 
                 $data =
                     [

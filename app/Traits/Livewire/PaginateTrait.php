@@ -9,7 +9,7 @@ trait PaginateTrait
             return [];
         }
         $page = $paginates->currentPage();
-        $currentPage = (int)floor(($paginates->currentPage())/10) ;
+        $currentPage = (int)ceil(($paginates->currentPage())/10) ;
         $listPage = $this->findListPage($paginates);
         $prev = $currentPage == 0  ? false  : $paginates->url(collect($listPage)->first()-1);
         $next = collect($listPage)->last() < $paginates->lastPage() ? $paginates->url(collect($listPage)->last()+1) : false;
@@ -31,7 +31,7 @@ trait PaginateTrait
 
     private function findListPage($paginates){
         $page = ($paginates->currentPage())%10;
-        $currentPage = (int)floor(($paginates->currentPage())/10) ;
+        $currentPage = (int)ceil(($paginates->currentPage())/10) ;
         $array = range(1, $paginates->lastPage());
         return collect($array)->chunk(10)->get($page == 0 ?$currentPage-1: $currentPage)->all();
     }
