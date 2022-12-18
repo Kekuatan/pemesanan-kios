@@ -370,15 +370,15 @@
                             @if(!blank($inputs["price_list_id"]))
                                 <div class="mb-75">
                                     <label for="staticEmail" class="col-sm-8 col-form-label">Pilih Bank</label>
-                                    <select wire:model="paymentProviderId" class="custom-select">
+                                    <select style="text-transform: uppercase" wire:model="paymentProviderId" class="custom-select">
                                         <option disabled="disabled" value="" selected>--- Pilih Bank---</option>
                                         @foreach ($paymentProviders as $paymentProvider)
                                             @if($paymentProvider->id == $paymentProviderId)
                                                 <option selected
-                                                        value="{{$paymentProvider->id}}">{{$paymentProvider->name . ' ' , $paymentProvider->type}}</option>
+                                                        value="{{$paymentProvider->id}}">{{strtoupper($paymentProvider->name )}}</option>
                                             @else
                                                 <option
-                                                    value="{{$paymentProvider->id}}">{{$paymentProvider->name . ' ' , $paymentProvider->type}}</option>
+                                                    value="{{$paymentProvider->id}}">{{strtoupper($paymentProvider->name )}}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -463,6 +463,18 @@
                                                placeholder="{{optional($inputs)["discount_price"] }}"
                                                wire:model="inputs.discount_price">
                                     </div>
+                                </div>
+
+                                <div class="mb-75 ">
+                                    <label for="staticEmail" class="col-sm-8 col-form-label">Custom Dp </label>
+                                    <div class="">
+                                        <input type="text"
+                                               class="right-input form-control invoice-edit-input flatpickr-input"
+                                               class="form-control-plaintext"
+                                               placeholder="{{optional($inputs)["dp_custom"] }}"
+                                               wire:model="inputs.dp_custom">
+                                    </div>
+                                    <p class="text-secondary text-right"> Rp. {{number_format($dp_normal, 2, ',', '.')}}</p>
                                 </div>
 
                                 <div class="mb-75 ">

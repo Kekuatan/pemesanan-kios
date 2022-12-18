@@ -59,6 +59,8 @@ class DetailProduct extends Component
     public $notes;
     public $note;
     public $dp_percent;
+    public $dp_custom;
+    public $dp_normal;
     public $discount;
     public $ppn_rate;
     public $ppn;
@@ -107,25 +109,29 @@ class DetailProduct extends Component
             self::watchInputData();
         }
 
-        if (!blank($this->dp) && $this->dp !== $this->inputs["dp"]) {
-            $this->inputs["dp"] = preg_replace("/[^0-9]/", "", $this->inputs["dp"]);
-            if (blank($this->inputs['dp'])) {
-                $this->dp_text = 'Rp. 0,00';
+        if (!blank($this->dp) && $this->dp !== $this->inputs["dp_custom"]) {
+            $this->inputs["dp_custom"] = preg_replace("/[^0-9]/", "", $this->inputs["dp_custom"]);
+            if (blank($this->inputs['dp_custom'])) {
+                $this->dp_custom = null;
+                $this->dp = ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+                $this->dp_text = 'Rp. ' . number_format($this->dp, 2, ',', '.');
+
             } else {
-                $this->dp = $this->inputs["dp"];
-                $this->dp_text = 'Rp. ' . number_format($this->inputs["dp"], 2, ',', '.');
+                $this->dp_custom = $this->inputs["dp_custom"];
+                $this->dp = $this->dp_custom;
+                $this->dp_text = 'Rp. ' . number_format($this->dp, 2, ',', '.');
             }
         }
 
-        if (!blank($this->dp) && $this->dp !== $this->inputs["dp"]) {
-            $this->inputs["dp"] = preg_replace("/[^0-9]/", "", $this->inputs["dp"]);
-            if (blank($this->inputs['dp'])) {
-                $this->dp_text = 'Rp. 0,00';
-            } else {
-                $this->dp = $this->inputs["dp"];
-                $this->dp_text = 'Rp. ' . number_format($this->inputs["dp"], 2, ',', '.');
-            }
-        }
+//        if (!blank($this->dp) && $this->dp !== $this->inputs["dp"]) {
+//            $this->inputs["dp"] = preg_replace("/[^0-9]/", "", $this->inputs["dp"]);
+//            if (blank($this->inputs['dp'])) {
+//                $this->dp_text = 'Rp. 0,00';
+//            } else {
+//                $this->dp = $this->inputs["dp"];
+//                $this->dp_text = 'Rp. ' . number_format($this->inputs["dp"], 2, ',', '.');
+//            }
+//        }
 
         if (!blank($this->payment) && $this->payment !== $this->inputs["payment"]) {
             $this->inputs["payment"] = preg_replace("/[^0-9]/", "", $this->inputs["payment"]);
@@ -197,7 +203,7 @@ class DetailProduct extends Component
             $this->total_price = ceil($this->price_with_discount + $this->ppn);
             $this->total_price_text = 'Rp. ' . number_format($this->total_price, 2, ',', '.');
 
-            $this->dp = ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+            $this->dp = !blank($this->dp_custom) ? $this->dp_custom : ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
             $this->dp_text = 'Rp. ' . number_format($this->dp, 2, ',', '.');
             $this->dp_status = ($this->sum_payment + $this->payment) >= $this->dp ? 1 : 0;
 
@@ -229,11 +235,11 @@ class DetailProduct extends Component
 
             $payload = [
                 'price_list_id' => $this->inputs['price_list_id'],
-                "siho_name" => blank($this->inputs['name']) ? $this->product->siho_name :  $this->inputs['name'],
+                "siho_name" => blank($this->inputs['name']) ? $this->product->siho_name : $this->inputs['name'],
                 "siho_ktp_no" => blank($this->inputs['ktpNo']) ? $this->ktpNo : $this->inputs['ktpNo'],
                 "siho_tlp" => blank($this->inputs['phoneNumber']) ? $this->phoneNumber : $this->inputs['phoneNumber'],
                 "siho_address" => blank($this->inputs['address']) ? $this->phoneNumber : $this->inputs['address'],
-                "discount_rate" => $this->inputs['discount_rate'] / 100 == $this->price_list ['payment_method']['discount_rate']? null : $this->inputs['discount_rate'] / 100,
+                "discount_rate" => $this->inputs['discount_rate'] / 100 == $this->price_list ['payment_method']['discount_rate'] ? null : $this->inputs['discount_rate'] / 100,
                 "status" => $this->left_payment <= 0 ? 1 : 0,
                 "total_price" => $this->total_price
             ];
@@ -242,9 +248,19 @@ class DetailProduct extends Component
                 $payload['briva'] = $this->briva;
             }
 
+            if (!blank($this->dp_custom)) {
+                $payload['dp_custom'] = $this->dp_custom;
+            }
+
+            if (!blank($this->product->dp_custom)) {
+                if (blank($this->dp_custom)) {
+                    $payload['dp_custom'] = null;
+                }
+            }
+
             if ($this->area !== $this->product->tu_area) {
                 $priceList = PriceList::where('area', $this->area)->with('paymentMethod')->get();
-                if(blank($priceList)){
+                if (blank($priceList)) {
                     DB::rollBack();
                     $this->alertifyError('error', 'Area tidak terdaftar');
                     return;
@@ -276,7 +292,7 @@ class DetailProduct extends Component
                 'transaction_id' => $this->transaction_id
             ]);
 
-            if( $this->product->total_price !== $this->total_price){
+            if ($this->product->total_price !== $this->total_price) {
                 $this->product->update(["total_price" => $this->total_price]);
             }
 
@@ -302,6 +318,7 @@ class DetailProduct extends Component
             ->with('priceList')->first();
 
         $this->briva = $this->product->briva;
+        $this->dp_custom = $this->product->dp_custom;
         $this->paymentProviders = PaymentProvider::get();
         $this->paymentProviderId = (collect($this->paymentProviders)->where('is_default', '==', 1)->first())['id'];
         $this->paymentProviderSelected = collect($this->paymentProviders)->where('id', '==', $this->paymentProviderId)->first();
@@ -361,9 +378,9 @@ class DetailProduct extends Component
         $this->price_list_id = $this->inputs['price_list_id'];
         $findPriceList = collect($this->priceLists)->where('id', '==', $this->inputs['price_list_id'])->first();
 
-        if(blank($findPriceList)){
-            $priceList = PriceList::where('id',  $this->price_list_id)->first();
-            $this->price_list = collect($this->priceLists)->where('payment_method_id', '==',$priceList->payment_method_id)->first()->toArray();
+        if (blank($findPriceList)) {
+            $priceList = PriceList::where('id', $this->price_list_id)->first();
+            $this->price_list = collect($this->priceLists)->where('payment_method_id', '==', $priceList->payment_method_id)->first()->toArray();
             $this->price_list_id = $this->price_list['id'];
             $this->inputs['price_list_id'] = $this->price_list_id;
         } else {
@@ -402,9 +419,12 @@ class DetailProduct extends Component
         $this->total_price = ceil($this->price_with_discount + $this->ppn);
         $this->total_price_text = 'Rp. ' . number_format($this->total_price, 2, ',', '.');
 
-        $this->inputs["dp"] = $this->inputs['dp'] ?? ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
-        $this->dp = ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
-        $this->dp_text = 'Rp. ' . number_format($this->inputs["dp"], 2, ',', '.');
+        $this->dp_custom = $this->product->dp_custom;
+        $this->inputs['dp_custom'] = $this->dp_custom;
+
+        $this->dp = !blank($this->dp_custom) ? $this->dp_custom : ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+        $this->dp_normal = ceil($this->total_price * $this->price_list ['payment_method']['dp_rate']);
+        $this->dp_text = 'Rp. ' . number_format($this->dp, 2, ',', '.');
 
         $this->inputs['payment'] = null;
         $this->payment_text = 'Rp. ' . number_format($this->inputs['payment'], 2, ',', '.');
