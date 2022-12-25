@@ -221,7 +221,19 @@
                     <!--Dayly-->
                     <div class="card p-2">
                         <div class="mb-0 table-responsive" data-v-aa799a9e="">
-                            <p class="text-center"> Laporan Harian</p>
+                            <div class="row">
+                                <div class="col-md-4">  <p class=""></p> </div>
+                                <div class="col-md-4">  <p class="text-center">Laporan Harian</p> </div>
+                                <div class="col-md-4" >
+                                    <button wire:click="excelDaily" data-v-36ff53bc=""
+
+                                            type="button"
+                                            class="btn mb-75 btn-success collapsed"
+                                            aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                            style="overflow-anchor: none; float: right"> Exel
+                                    </button>
+                                </div>
+                            </div>
                             <table role="table" id="detail-report" aria-busy="false" aria-colcount="6" class="table b-table"
                                    id="__BVID__3462">
                                 <!----><!---->
@@ -280,7 +292,19 @@
                     <!--Yearly-->
                     <div class="card p-2">
                         <div class="mb-0 table-responsive" data-v-aa799a9e="">
-                            <p class="text-center"> Laporan Tahunan</p>
+                            <div class="row">
+                                <div class="col-md-4">  <p class=""></p> </div>
+                                <div class="col-md-4">  <p class="text-center">Laporan Tahunan</p> </div>
+                                <div class="col-md-4" >
+                                    <button wire:click="excelYearly" data-v-36ff53bc=""
+
+                                            type="button"
+                                            class="btn mb-75 btn-success collapsed"
+                                            aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                            style="overflow-anchor: none; float: right"> Exel
+                                    </button>
+                                </div>
+                            </div>
                             <table role="table" id="detail-report" aria-busy="false" aria-colcount="6" class="table b-table"
                                    id="__BVID__3462">
                                 <!----><!---->
@@ -337,7 +361,19 @@
                     <!--Monthly-->
                     <div class="card p-2">
                         <div class="mb-0 table-responsive" data-v-aa799a9e="">
-                            <p class="text-center"> Laporan Bulanan</p>
+                            <div class="row">
+                                <div class="col-md-4">  <p class=""></p> </div>
+                                <div class="col-md-4">  <p class="text-center">Laporan Bulanan</p> </div>
+                                <div class="col-md-4" >
+                                    <button wire:click="excelMonthly" data-v-36ff53bc=""
+
+                                            type="button"
+                                            class="btn mb-75 btn-success collapsed"
+                                            aria-expanded="false" aria-controls="sidebar-send-invoice"
+                                            style="overflow-anchor: none; float: right"> Exel
+                                    </button>
+                                </div>
+                            </div>
                             <table role="table" id="detail-report" aria-busy="false" aria-colcount="6" class="table b-table"
                                    id="__BVID__3462">
                                 <!----><!---->
@@ -399,19 +435,20 @@
 
         <!--Detail-->
         <div class="card p-2">
-            <div class="mb-0 table-responsive" data-v-aa799a9e="">
-                <div class="row">
-                    <div class="col-md-4">  <p class=""></p> </div>
-                    <div class="col-md-4">  <p class="text-center">Laporan Detail</p> </div>
-                    <div class="col-md-4">
-                        <button data-v-36ff53bc=""
-                                                     type="button"
-                                                     class="btn mb-75 btn-primary collapsed"
-                                                     aria-expanded="false" aria-controls="sidebar-send-invoice"
-                                                     style="overflow-anchor: none;"> Exel
-                        </button>
-                    </div>
+            <div class="row">
+                <div class="col-md-4">  <p class=""></p> </div>
+                <div class="col-md-4">  <p class="text-center">Laporan Detail</p> </div>
+                <div class="col-md-4" >
+                    <button wire:click="excelDetail" data-v-36ff53bc=""
+                            type="button"
+                            class="btn mb-75 btn-success collapsed"
+                            aria-expanded="false" aria-controls="sidebar-send-invoice"
+                            style="overflow-anchor: none; float: right"> Exel
+                    </button>
                 </div>
+            </div>
+            <div class="mb-0 table-responsive" data-v-aa799a9e="">
+
 
                 <table role="table" id="detail-report" aria-busy="false" aria-colcount="6" class="table b-table"
                        id="__BVID__3462">
@@ -420,6 +457,9 @@
                     <tr role="row" class="">
                         <th role="columnheader" scope="col" aria-colindex="2" class="">
                             <div>Nama</div>
+                        </th>
+                        <th role="columnheader" scope="col" aria-colindex="2" class="">
+                            <div>KTP</div>
                         </th>
                         <th role="columnheader" scope="col" aria-colindex="3" class="">
                             <div>Nomer Tempat Usaha</div>
@@ -451,8 +491,12 @@
                             <div>Harga total</div>
                         </th>
                         <th role="columnheader" scope="col" aria-colindex="6" class="">
+                            <div>Jenis Pembayaran</div>
+                        </th>
+                        <th role="columnheader" scope="col" aria-colindex="6" class="">
                             <div>Pembayaran</div>
                         </th>
+
                         <th role="columnheader" scope="col" aria-colindex="6" class="">
                             <div>Total Pembayaran</div>
                         </th>
@@ -473,6 +517,9 @@
                                 <td aria-colindex="2" role="cell" class="">
                                     <div>{{$search['siho_name']}}</div>
                                 </td> <!--Nama</div-->
+                                <td aria-colindex="2" role="cell" class="">
+                                    <div>{{$search['siho_ktp_no']}}</div>
+                                </td>
                                 <td aria-colindex="3" role="cell" class="">
                                     <div>{{$search['tu_no']}}</div>
                                 </td> <!--Nomer Tempat Usaha-->
@@ -500,6 +547,9 @@
                                 <td aria-colindex="6" role="cell" class="">
                                     <div>{{'Rp. ' . number_format($search['calculation_total_price'], 2, ',', '.')}}</div>
                                 </td>  <!--Harga total</-->
+                                <td aria-colindex="6" role="cell" class="">
+                                    <div>{{$search['price_list']['payment_method']['name']}}</div>
+                                </td>
                                 <td aria-colindex="6" role="cell" class="">
                                     <div>{{'Rp. ' . number_format($payment['amount'], 2, ',', '.')}}</div>
                                 </td><!--Pembayaran</div-->

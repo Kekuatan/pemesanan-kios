@@ -3,6 +3,9 @@
 namespace App\Http\Livewire\Pages\Reports;
 
 use App\Enums\PriceListEnum;
+use App\Exports\DailyReport;
+use App\Exports\DetailReport;
+use App\Exports\PeriodicReport;
 use App\Models\Payment;
 use App\Models\PaymentMethod;
 use App\Models\PaymentProvider;
@@ -13,6 +16,7 @@ use App\Services\ReportService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardReport extends Component
 {
@@ -67,18 +71,20 @@ class DashboardReport extends Component
 
     }
 
-    private function datespanFormat(){
+    private function datespanFormat()
+    {
         if (!blank(optional($this->filters)['datespan'])) {
-            if($this->filters['datespan'] == 'month'){
+            if ($this->filters['datespan'] == 'month') {
                 $this->start = Carbon::parseFromLocale(Carbon::parseFromLocale($this->start)->firstOfMonth() ?? Carbon::now()->firstOfMonth())->format('d-m-Y');
                 $this->until = Carbon::parseFromLocale(Carbon::parseFromLocale($this->until)->lastOfMonth())->format('d-m-Y');
             }
-            if($this->filters['datespan'] == 'day'){
+            if ($this->filters['datespan'] == 'day') {
                 $this->start = Carbon::parseFromLocale(Carbon::today())->format('d-m-Y');
                 $this->until = Carbon::parseFromLocale(Carbon::today())->format('d-m-Y');
             }
         }
     }
+
     public function updatedFilters()
     {
         $this->datespanFormat();
@@ -91,7 +97,7 @@ class DashboardReport extends Component
         $queryStr = "sum(amount) as sums, DATE_FORMAT(kwitansi_date,'%M %Y') as date, DATE_FORMAT(kwitansi_date,'%m') as dateKey";
 
         $paymentFilterSubquery = $reportService->paymentFilterSubquery($queryStr, $this->filters, collect($this->groupBys['monthly'])->toArray(), $this->groupCategory);
-        $this->groupBys['daily'] = $paymentFilterSubquery['groups'];
+        $this->groupBys['monthly'] = $paymentFilterSubquery['groups'];
         $payments = Payment::select(
             DB::raw($paymentFilterSubquery['queryStr']),
         )
@@ -286,6 +292,30 @@ class DashboardReport extends Component
         $this->daily = $this->daily();
         $this->yearly = $this->yearly();
 //        dd($this->filters,$search);
+    }
+
+    public function excelDaily()
+    {
+        $title = 'Laporan Harian';
+        return Excel::download(new PeriodicReport($title, $this->daily, collect($this->groupBys['daily'])->toArray()), $title . $this->start . '.xlsx');
+    }
+
+    public function excelMonthly()
+    {
+        $title = 'Laporan Bulanan';
+        return Excel::download(new PeriodicReport($title, $this->monthly, collect($this->groupBys['monthly'])->toArray()), $title . '' . $this->start . '.xlsx');
+    }
+
+    public function excelYearly()
+    {
+        $title = 'Laporan Tahunan';
+        return Excel::download(new PeriodicReport($title, $this->yearly, collect($this->groupBys['yearly'])->toArray()), $title . $this->start . '.xlsx');
+    }
+
+    public function excelDetail()
+    {
+        $title = 'Laporan Detail';
+        return Excel::download(new DetailReport($title, $this->searchs), $title . $this->start . '.xlsx');
     }
 
     public function render()

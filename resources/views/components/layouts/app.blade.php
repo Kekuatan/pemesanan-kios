@@ -9,7 +9,7 @@
         <link href="{{ asset('css/font-bg-custom-css.css') }}" rel="stylesheet">
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
         @livewireStyles
 
         <style>
@@ -216,6 +216,15 @@
 
     </p>
 
+    <script>
+        function ExportToExcel(id, fn, dl) {
+            var elt = document.getElementById(id);
+            var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+            return dl ?
+                XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'base64' }):
+                XLSX.writeFile(wb, fn || ('MySheetName.' + ('xlsx')));
+        }
+    </script>
 </div>
 
 
