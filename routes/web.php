@@ -6,6 +6,7 @@ use App\Http\Livewire\Pages\Login;
 use App\Http\Livewire\Pages\Product\DetailProduct;
 use App\Http\Livewire\Pages\Product\OrderProduct;
 use App\Http\Livewire\Pages\Product\ListProduct;
+use App\Http\Livewire\Pages\Reports\DashboardReport;
 use App\Http\Livewire\Pages\User;
 use App\Http\Livewire\Pages\VerifikasiPayment;
 use App\Models\Payment;
@@ -66,4 +67,12 @@ Route::group([
     Route::get('/order', OrderProduct::class)->name('.order')->name('order');
 //    Route::get('/list', ListProduct::class)->name('.list');
     Route::get('/detail', DetailProduct::class)->name('.detail');
+});
+
+Route::group([
+    'prefix' => '/reports',
+    'middleware' =>['auth:web'], //['auth:staff', 'logging-web', 'twofa'],
+    'as' => 'reports'
+], function () {
+    Route::get('/', DashboardReport::class);
 });

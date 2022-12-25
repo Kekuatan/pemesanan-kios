@@ -21,4 +21,9 @@ class PriceList extends Model
     {
         return  $this->belongsTo(PaymentMethod::class);
     }
+
+    public function paymentProvider()
+    {
+        return  $this->belongsTo(PaymentProvider::class);
+    }
 }
