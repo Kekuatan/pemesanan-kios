@@ -196,6 +196,10 @@ class DetailProduct extends Component
 
 
             $this->price_with_discount = ceil(($this->price - $this->discount));
+
+            $this->ppn = ceil($this->price_with_discount * PriceListEnum::PPN);
+            $this->ppn_text = 'Rp. ' . number_format($this->ppn, 2, ',', '.');
+
             $this->price_with_discount_text = 'Rp. ' . number_format($this->price_with_discount, 2, ',', '.');
 
             $this->discount_text = 'Rp. ' . number_format($this->discount, 2, ',', '.');
