@@ -44,7 +44,7 @@ Route::group([
 
 Route::group([
     'prefix' => '/admin',
-    'middleware' =>['auth:web'], //['auth:staff', 'logging-web', 'twofa'],
+    'middleware' =>['auth:web','role:staff'], //['auth:staff', 'logging-web', 'twofa'],
     'as' => 'admin'
 ], function () {
     Route::get('/user', User::class);
@@ -52,7 +52,7 @@ Route::group([
 
 Route::group([
     'prefix' => '/kwitansi-team',
-    'middleware' =>['auth:web'], //['auth:staff', 'logging-web', 'twofa'],
+    'middleware' =>['auth:web', ], //['auth:staff', 'logging-web', 'twofa'],
     'as' => 'kwitansi-team'
 ], function () {
     Route::get('/verifikasi-payment', VerifikasiPayment::class);
@@ -71,7 +71,7 @@ Route::group([
 
 Route::group([
     'prefix' => '/reports',
-    'middleware' =>['auth:web'], //['auth:staff', 'logging-web', 'twofa'],
+    'middleware' =>['auth:web','role:staff'], //['auth:staff', 'logging-web', 'twofa'],
     'as' => 'reports'
 ], function () {
     Route::get('/', DashboardReport::class);
