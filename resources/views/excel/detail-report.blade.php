@@ -46,6 +46,9 @@
                 <div>Pembayaran</div>
             </th>
             <th role="columnheader" scope="col" aria-colindex="6" class="">
+                <div>Bank</div>
+            </th>
+            <th role="columnheader" scope="col" aria-colindex="6" class="">
                 <div>Total Pembayaran</div>
             </th>
             <th role="columnheader" scope="col" aria-colindex="6" class="">
@@ -101,6 +104,11 @@
                     <td aria-colindex="6" role="cell" class="">
                         <div>{{$payment['amount']}}</div>
                     </td><!--Pembayaran</div-->
+
+                    <td aria-colindex="6" role="cell" class="" style="text-transform: uppercase">
+                        <div>{{ optional(optional($payment)['payment_provider'])['name'] }}</div>
+                    </td><!--Pembayaran</div-->
+
                     <td aria-colindex="6" role="cell" class="">
                         <div>{{$sumPayment}}</div>
                     </td> <!--Total Pembayaran</-->

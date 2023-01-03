@@ -49,6 +49,16 @@
                     </div>
                 </div>
                 <div class="mb-2 row right-input">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Jabatan</label>
+                    <div class="col-sm-8">
+                            <select wire:model="group" class="custom-select">
+                                <option value="" selected>--- Semua ---</option>
+                                <option value="2"> Staff </option>
+                                <option value="2"> Petugas </option>
+                            </select>
+                    </div>
+                </div>
+                <div class="mb-2 row right-input">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
                     <div class="col-sm-8">
                         <input type="text" wire:model="email" class="right-input form-control " id="">

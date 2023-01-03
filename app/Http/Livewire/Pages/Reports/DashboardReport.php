@@ -249,6 +249,7 @@ class DashboardReport extends Component
                     'payments' => function ($query) {
                         return $this->searchPaymentQuery($query);
                     },
+                    'payments.paymentProvider',
                     'priceList.paymentMethod',
                     'priceList' =>
                         function ($query) {
